@@ -2,7 +2,7 @@
         <section>
             <v-footer dark>
                 <v-card class="flex" flat tile>
-                    <v-card-actions class="amber lighten-2 darken-2 justify-center">
+                    <v-card-actions class="amber justify-center">
                         <strong class="subheading">University Phoyao : Software Engineer SE'04</strong>
                     </v-card-actions>
                     

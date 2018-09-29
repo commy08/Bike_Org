@@ -1,6 +1,6 @@
 <template>
         <section>
-            <v-toolbar class="amber lighten-2" >
+            <v-toolbar class="amber" >
                 
                 <v-layout xs9 align-end>
                 <router-link to="/" tag="button">
@@ -28,7 +28,7 @@
                     <v-btn class="blue lighten-1">รายการแข่งขัน</v-btn>
                 </router-link>
                 <router-link to="/login">
-                    <v-btn color="success">เข้าสู่ระบบผ่าน Line</v-btn>
+                    <v-btn dark color="light-green accent-4">เข้าสู่ระบบผ่าน Line</v-btn>
                 </router-link>
             </v-toolbar>
         </section>
