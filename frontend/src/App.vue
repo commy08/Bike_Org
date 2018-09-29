@@ -1,28 +1,35 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <router-view name="header"></router-view>
+    <router-view></router-view>
+    <router-view name="footer"></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import userStores from '@/stores/userStores'
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
-    HelloWorld
-  }
+
+  },
+  data () {
+    return {
+      users: [],
+      active: [],
+
+    }
+  },
+  methods:{
+    loadUserActive: async function () {
+      await userStores.dispatch('loaduserActive')
+      this.users = userStores.state.userOrgAT.users;
+      this.active = userStores.state.userOrgAT.title;
+    }
+  },
+  async mounted() {
+    await this.loadUserActive()
+  },
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
