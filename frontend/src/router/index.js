@@ -8,7 +8,7 @@ import Header from '@/pages/layout/header'
 import Footer from '@/pages/layout/footer'
 import Home   from '@/pages/HomePages/home'
 import Events from '@/pages/HomePages/event'
-import Register from '@/pages/HomePages/user/registerOrg'
+import Register from '@/pages/HomePages/user/profileOrg'
 import Login from '@/pages/HomePages/login'
 
 const routes = [
@@ -31,12 +31,10 @@ const routes = [
     }
   },
   {
-    path: '/registerOrg',
-    name:'registerOrg',
+    path: '/profileOrg',
+    name:'profileOrg',
     components: {
-        header: Header,
         default: Register,
-        footer: Footer
     }
   },
   {
