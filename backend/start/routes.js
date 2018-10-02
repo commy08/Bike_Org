@@ -12,7 +12,9 @@
 | http://adonisjs.com/docs/4.1/routing
 |
 */
-
 const Route = use('Route')
 
-Route.on('/').render('welcome')
+// Route.on('/').render('welcome')
+
+Route.get('/api/v1/lines', 'LineController.index');
+Route.get('/api/v1/lines/callback', 'LineController.callback');
