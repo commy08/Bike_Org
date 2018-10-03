@@ -10,8 +10,11 @@ import Home   from '@/pages/HomePages/home'
 import Events from '@/pages/HomePages/event'
 import Register from '@/pages/HomePages/user/profileOrg'
 import Login from '@/pages/HomePages/login'
-import Profile from '@/pages/HomePages/user/profile'
-import callback from '@/pages/layout/callback'
+import Profile from '@/pages/HomePages/user/profileOrg'
+import Callback from '@/pages/layout/callback'
+import Checkuser from '@/pages/layout/checkuser'
+import RegiProfileUser from '@/pages/HomePages/user/regiProfileUser'
+import RegiProfileOrg from '@/pages/HomePages/user/regiProfileOrg'
 
 const routes = [
   { 
@@ -61,13 +64,26 @@ const routes = [
     path: '/callback',
     name:'callback',
     components: {
-        default: callback
+        default: Callback,
     }
+  },
+  {
+    path: '/checkuser',
+    name:'checkuser',
+    components: {
+        header: Header,
+        default: Checkuser,
+        footer: Footer
+    },
+    children:[
+      { path : '/checkuser/regiProfileUser', name : 'RegiProfileUser',component : RegiProfileUser },
+      { path : '/checkuser/regiProfileOrg', name : 'RegiProfileOrg',component : RegiProfileOrg }
+    ],
   },
 ]
 
 const router = new VueRouter({
-  mode:'history',
+  mode :'history',
   routes // short for `routes: routes`
 })
 

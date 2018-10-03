@@ -21,7 +21,8 @@ export default {
   },
   data(){
       return {
-        
+        name: null,
+        picture: null,
       }
   },
   methods: {
@@ -50,7 +51,7 @@ export default {
   },
   async mounted () {
     await this.getTokenLine()
-    if(localStorage.access_token) router.push('/event')
+    if(localStorage.access_token) router.push('/')
     else router.push('/')
     // await this.getUser()
   },
