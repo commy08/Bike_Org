@@ -15,6 +15,8 @@ import Callback from '@/pages/layout/callback'
 import Checkuser from '@/pages/layout/checkuser'
 import RegiProfileUser from '@/pages/HomePages/user/regiProfileUser'
 import RegiProfileOrg from '@/pages/HomePages/user/regiProfileOrg'
+import MTBBike from '@/pages/HomePages/mtbBike'
+import RoadBike from '@/pages/HomePages/roadBike'
 
 const routes = [
   { 
@@ -33,7 +35,11 @@ const routes = [
         header: Header,
         default: Events,
         footer: Footer
-    }
+    },
+    children:[
+      {path : '', name : 'MTBBike',component : MTBBike},
+      {path : '/event/RoadBike', name : 'RoadBike',component : RoadBike}
+    ],
   },
   {
     path: '/profileOrg',
@@ -76,7 +82,7 @@ const routes = [
         footer: Footer
     },
     children:[
-      { path : '/checkuser/regiProfileUser', name : 'RegiProfileUser',component : RegiProfileUser },
+      { path : '', name : 'RegiProfileUser',component : RegiProfileUser },
       { path : '/checkuser/regiProfileOrg', name : 'RegiProfileOrg',component : RegiProfileOrg }
     ],
   },

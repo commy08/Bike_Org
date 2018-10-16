@@ -15,13 +15,11 @@
                     </div>
                 </v-flex>
             </v-layout>
-            <v-card light class="elevation-1">
-                <div>
+            <v-card light>
                     <v-layout justify-space-around>
-                        <router-link to="/checkuser/regiProfileUser">สมัครสมาชิกทั่วไป</router-link>
+                        <router-link to="/checkuser">สมัครสมาชิกทั่วไป</router-link>
                         <router-link to="/checkuser/regiProfileOrg">สมัครสมาชิกผู้จัดกิจกรรม</router-link>
                     </v-layout>
-                </div>
                 <router-view></router-view>
             </v-card>
         </v-container>
