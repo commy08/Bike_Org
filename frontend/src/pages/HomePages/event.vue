@@ -11,7 +11,7 @@
             <span></span>
             <span></span>
             <span></span>
-            <v-toolbar class="blue-grey darken-3">
+            <v-toolbar class="amber title">
                 <v-layout justify-space-around>
                     <router-link to="/event">จักรยานเสือภูเขา</router-link>
                     <router-link to="/event/RoadBike">จักรยานเสือทางเรียบ</router-link>

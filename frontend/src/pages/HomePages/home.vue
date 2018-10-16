@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
     <section>
-      <v-parallax :src="require('@/assets/background.jpg')" alt="background.jpg" height="600">
+      <v-parallax :src="require('@/assets/img/background.jpg')" alt="background.jpg" height="600">
           <!-- <v-layout column align-center justify-center class="black-text">
               <img src="@/assets/logo.png" alt="logo" height="200">
           </v-layout> -->
