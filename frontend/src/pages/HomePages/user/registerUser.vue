@@ -5,24 +5,51 @@
                 <v-text-field
                 v-model="name"
                 :rules="nameRules"
-                label="ชื่อ - นามสกุล"
+                label="ชื่อ"
                 required
                 ></v-text-field>
                 <v-text-field
-                v-model="IDcard"
-                :rules="rulesIDcard"
-                :counter="13"
-                label="เลขบัตรประชาชน"
+                v-model="lname"
+                :rules="lnameRules"
+                label="นามสกุล"
                 required
                 ></v-text-field>
                 <v-text-field
-                v-model="email"
-                :rules="emailRules"
-                label="E-mail"
+                v-model="phone"
+                :rules="rulesPhone"
+                :counter="10"
+                label="เบอร์มือถือ"
                 required
                 ></v-text-field>
+                <v-flex xs12 lg6>
+                    <v-menu
+                    ref="menu"
+                    :close-on-content-click="false"
+                    v-model="menu"
+                    :nudge-right="40"
+                    lazy
+                    transition="scale-transition"
+                    offset-y
+                    full-width
+                    max-width="290px"
+                    min-width="290px"
+                    >
+                    <v-text-field
+                        slot="activator"
+                        v-model="dateFormatted"
+                        label="Date"
+                        hint="MM/DD/YYYY format"
+                        persistent-hint
+                        prepend-icon="event"
+                        @blur="date = parseDate(dateFormatted)"
+                    ></v-text-field>
+                    <v-date-picker v-model="date" no-title @input="menu = false"></v-date-picker>
+                    </v-menu>
+                    <p>Date in ISO format: <strong>{{ date }}</strong></p>
+                </v-flex>
+
                 <v-select
-                v-model="select"
+                v-model="gender"
                 :items="items"
                 :rules="[v => !!v || 'Item is required']"
                 label="เพศ"
@@ -30,7 +57,7 @@
                 ></v-select>
 				<v-flex xs12 class="text-xs-center text-sm-center text-md-center text-lg-center">
 					<img :src="imageUrl" height="150" v-if="imageUrl"/>
-					<v-text-field label="Select Image" @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
+					<v-text-field label="Select Image" @click='pickFile' v-model='images' prepend-icon='attach_file'></v-text-field>
 					<input
 						type="file"
 						style="display: none"
@@ -40,7 +67,7 @@
 					>
 				</v-flex>
                 <v-checkbox
-                v-model="checkbox"
+                v-model="checkboxx"
                 :rules="[v => !!v || 'You must agree to continue!']"
                 label="Do you agree?"
                 required
@@ -62,17 +89,33 @@
   import axios from 'axios'
 
   export default {
-    data: () => ({
-      title: "Image Upload",
-      dialog: false,
-		imageName: '',
-		imageUrl: '',
-		imageFile: '',
-      valid: true,
-      name: '',
-      nameRules: [
+    data: vm => ({
+      form : {
+          name : null,
+          lname : null,
+          phone : null,
+          dateFormatted : null,
+          gender : null,
+          images : null,
+          checkboxx : null,
+      },
+      submit : false,
+      title : "Image Upload",
+      dialog : false,
+		imageName : '',
+		imageUrl : '',
+		imageFile : '',
+      valid : true,
+      name : '',
+      checkbox: false,
+      date : new Date().toISOString().substr(0, 10),
+      dateFormatted : vm.formatDate(new Date().toISOString().substr(0, 10)),
+      menu : false,
+      nameRules : [
         v => !!v || 'Name is required',
-        v => (v && v.length <= 10) || 'Name must be less than 10 characters'
+      ],
+      lnameRules: [
+        v => !!v || 'Last name is required',
       ],
       email: '',
       emailRules: [
@@ -84,9 +127,24 @@
         'ชาย',
         'หญิง'
       ],
-      checkbox: false
-
+      phone: '',
+      rulesPhone: [
+          v => !!v || 'Phone is required',
+          v => (v && v.length <= 10) || 'Phone must be less than 10 characters'
+      ],
     }),
+
+    computed: {
+        computedDateFormatted () {
+        return this.formatDate(this.date)
+        }
+    },
+
+    watch: {
+        date (val) {
+        this.dateFormatted = this.formatDate(this.date)
+        }
+    },
 
     methods: {
       submit () {
@@ -125,7 +183,19 @@
 				this.imageFile = ''
 				this.imageUrl = ''
 			}
-		}
+        },
+        formatDate (date) {
+        if (!date) return null
+
+        const [year, month, day] = date.split('-')
+        return `${month}/${day}/${year}`
+        },
+        parseDate (date) {
+        if (!date) return null
+
+        const [month, day, year] = date.split('/')
+        return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+        }
     }
   }
 </script>
