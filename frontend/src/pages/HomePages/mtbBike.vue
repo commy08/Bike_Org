@@ -1,69 +1,19 @@
 <template>
     <v-app>
         <section>
-            <v-container  fluid grid-list-lg>
-                <v-layout row wrap>
+            <v-container  >
+                <v-layout row>
                     <v-flax xs12 sm6 offset-lg1>
                         <v-card class="elevation-1">
                             <v-card-title class="headline light-green">
                                 <div>
                                     <div class="headline">University of Phayao Game</div>
-                                    <span class="black--text">16/02/61</span>
+                                    <span class="black-align-text">16/02/61</span>
                                 </div>
                             </v-card-title>
-                            <img src="@/assets/img/1460953620_20077.jpg" alt="Vuetify.js" height="150">
-                            <v-card-actions>
-                                <v-btn flat>ดูรายละเอียด</v-btn>
-                                <v-btn flat color="purple" @click="dialog = !dialog">สมัครเข้าร่วมรายการ</v-btn>
-                                <v-spacer></v-spacer>
-                                <v-btn icon @click="show = !show">
-                                <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
-                                </v-btn>
-                            </v-card-actions>
-                            <v-slide-y-transition>
-                                <v-card-text v-show="show">
-                                    เป็นปีแรกที่ มหาวิทยาลัยพะเยาเข้าแข่งขันกีฬาจักรยาน โดยเป็นไปตามคาดได้รับเหรียญทองจากจักรยานเสือภูเขา 1 เหรียญ 
-                                    และจากจักรยานเสือหมอบ 2 เหรียญ
-                                </v-card-text>
-                            </v-slide-y-transition>
-                        </v-card>
-                    </v-flax>
-                    
-                    <v-flax xs12 sm6 offset-sm3>
-                        <v-card class="elevation-1">
-                            <v-card-title class="headline light-green">
-                                <div>
-                                    <div class="headline">University of Phayao Game</div>
-                                    <span class="black--text">16/02/61</span>
-                                </div>
-                            </v-card-title>
-                            <img src="@/assets/img/1460953620_20077.jpg" alt="Vuetify.js" height="150">
-                            <v-card-actions>
-                                <v-btn flat>ดูรายละเอียด</v-btn>
-                                <v-btn flat color="purple" @click="dialog = !dialog">สมัครเข้าร่วมรายการ</v-btn>
-                                <v-spacer></v-spacer>
-                                <v-btn icon @click="show = !show">
-                                <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
-                                </v-btn>
-                            </v-card-actions>
-                            <v-slide-y-transition>
-                                <v-card-text v-show="show">
-                                    เป็นปีแรกที่ มหาวิทยาลัยพะเยาเข้าแข่งขันกีฬาจักรยาน โดยเป็นไปตามคาดได้รับเหรียญทองจากจักรยานเสือภูเขา 1 เหรียญ 
-                                    และจากจักรยานเสือหมอบ 2 เหรียญ
-                                </v-card-text>
-                            </v-slide-y-transition>
-                        </v-card>
-                    </v-flax>
-                    
-                    <v-flax xs12 sm6 offset-sm3>
-                        <v-card class="elevation-1">
-                            <v-card-title class="headline light-green">
-                                <div>
-                                    <div class="headline">University of Phayao Game</div>
-                                    <span class="black--text">16/02/61</span>
-                                </div>
-                            </v-card-title>
-                            <img src="@/assets/img/1460953620_20077.jpg" alt="Vuetify.js" height="150">
+                            <v-card>
+                                <img src="@/assets/img/1460953620_20077.jpg" alt="Vuetify.js" contain height="150">
+                            </v-card>
                             <v-card-actions>
                                 <v-btn flat>ดูรายละเอียด</v-btn>
                                 <v-btn flat color="purple" @click="dialog = !dialog">สมัครเข้าร่วมรายการ</v-btn>

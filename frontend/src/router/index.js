@@ -9,14 +9,17 @@ import Footer from '@/pages/layout/footer'
 import Home   from '@/pages/HomePages/home'
 import Events from '@/pages/HomePages/event'
 import Register from '@/pages/HomePages/user/profileOrg'
-import Login from '@/pages/HomePages/login'
+// import Login from '@/pages/HomePages/login'
 import Profile from '@/pages/HomePages/user/profileOrg'
 import Callback from '@/pages/layout/callback'
-import Checkuser from '@/pages/layout/checkuser'
-import RegiProfileUser from '@/pages/HomePages/user/regiProfileUser'
-import RegiProfileOrg from '@/pages/HomePages/user/regiProfileOrg'
+// import ProfileUser from '@/pages/HomePages/user/profileUser'
+// import RegiProfileUser from '@/pages/HomePages/user/regiProfileUser'
+// import RegiProfileOrg from '@/pages/HomePages/user/regiProfileOrg'
 import MTBBike from '@/pages/HomePages/mtbBike'
 import RoadBike from '@/pages/HomePages/roadBike'
+import SelectType from '@/pages/HomePages/selectType'
+import RegisterUser from '@/pages/HomePages/user/registerUser'
+import RegisterOrg from '@/pages/HomePages/user/registerOrg'
 
 const routes = [
   { 
@@ -48,15 +51,15 @@ const routes = [
         default: Register,
     }
   },
-  {
-    path: '/login',
-    name:'login',
-    components: {
-        header: Header,
-        default: Login,
-        footer: Footer
-    }
-  },
+  // {
+  //   path: '/login',
+  //   name:'login',
+  //   components: {
+  //       header: Header,
+  //       default: Login,
+  //       footer: Footer
+  //   }
+  // },
   {
     path: '/profile',
     name:'profile',
@@ -73,18 +76,45 @@ const routes = [
         default: Callback,
     }
   },
+  // {
+  //   path: '/ProfileUser',
+  //   name:'profileuser',
+  //   components: {
+  //       header: Header,
+  //       default: ProfileUser,
+  //       footer: Footer
+  //   },
+  //   children:[
+  //     { path : '', name : 'RegiProfileUser',component : RegiProfileUser },
+  //     { path : '/profileUser/regiProfileOrg', name : 'RegiProfileOrg',component : RegiProfileOrg }
+  //   ],
+  // },
   {
-    path: '/checkuser',
-    name:'checkuser',
+    path: '/SelectType',
+    name:'selectType',
     components: {
         header: Header,
-        default: Checkuser,
+        default: SelectType,
         footer: Footer
-    },
-    children:[
-      { path : '', name : 'RegiProfileUser',component : RegiProfileUser },
-      { path : '/checkuser/regiProfileOrg', name : 'RegiProfileOrg',component : RegiProfileOrg }
-    ],
+    }
+  },
+  {
+    path: '/RegisterUser',
+    name:'registerUser',
+    components: {
+        header: Header,
+        default: RegisterUser,
+        footer: Footer
+    }
+  },
+  {
+    path: '/RegisterOrg',
+    name:'registerOrg',
+    components: {
+        header: Header,
+        default: RegisterOrg,
+        footer: Footer
+    }
   },
 ]
 

@@ -1,12 +1,12 @@
 <template>
-    <main>
-        <div align="center" class="mt-5">
+    <v-app>
+      <div align="center" class="mt-5">
             <i class="fa fa-refresh fa-spin" style="font-size:50px;"></i>
             <br>
             <br>
             Please Wait...
         </div>
-    </main>
+    </v-app>
 </template>
 
 
@@ -43,6 +43,7 @@ export default {
       // console.log(userStores.state.access_token);
       if(userStores.state.access_token.status == 200){
           localStorage.access_token = userStores.state.access_token.access_token;
+          router.push('/SelectType')
       }else{
         router.push('/') 
       }
@@ -51,7 +52,7 @@ export default {
   },
   async mounted () {
     await this.getTokenLine()
-    if(localStorage.access_token) router.push('/')
+    if(localStorage.access_token) router.push('/SelectType')
     else router.push('/')
     // await this.getUser()
   },
