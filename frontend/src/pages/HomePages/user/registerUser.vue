@@ -1,7 +1,8 @@
 <template>
     <v-app dark>
-        <v-container >
-            <v-form ref="form" v-model="valid" lazy-validation>
+      <v-container>
+      <v-flex xs6>
+            <v-form ref="form" v-model="valid" lazy-validation >
                 <v-text-field
                 v-model="name"
                 :rules="nameRules"
@@ -38,26 +39,25 @@
                         slot="activator"
                         v-model="dateFormatted"
                         label="Date"
-                        hint="MM/DD/YYYY format"
+                        hint="DD/MM/YYYY format"
                         persistent-hint
                         prepend-icon="event"
                         @blur="date = parseDate(dateFormatted)"
                     ></v-text-field>
                     <v-date-picker v-model="date" no-title @input="menu = false"></v-date-picker>
                     </v-menu>
-                    <p>Date in ISO format: <strong>{{ date }}</strong></p>
+                    <p>ปี / เดือน / วัน: <strong>{{ date }}</strong></p>
                 </v-flex>
-
-                <v-select
-                v-model="gender"
-                :items="items"
-                :rules="[v => !!v || 'Item is required']"
-                label="เพศ"
-                required
-                ></v-select>
-				<v-flex xs12 class="text-xs-center text-sm-center text-md-center text-lg-center">
+                  <v-select
+                  v-model="gender"
+                  :items="items"
+                  :rules="[v => !!v || 'Item is required']"
+                  label="เพศ"
+                  required
+                  ></v-select>
+				<v-flex xs6 class="text-xs-center text-sm-center text-md-center text-lg-center">
 					<img :src="imageUrl" height="150" v-if="imageUrl"/>
-					<v-text-field label="Select Image" @click='pickFile' v-model='images' prepend-icon='attach_file'></v-text-field>
+					<v-text-field label="Select Image (รูปบัตรประชาชน)"  @click='pickFile' v-model='images' prepend-icon='attach_file'></v-text-field>
 					<input
 						type="file"
 						style="display: none"
@@ -69,7 +69,7 @@
                 <v-checkbox
                 v-model="checkboxx"
                 :rules="[v => !!v || 'You must agree to continue!']"
-                label="Do you agree?"
+                label="ยืนยันการสมัครสมาชิก"
                 required
                 ></v-checkbox>
 
@@ -81,6 +81,12 @@
             </v-btn>
             <v-btn @click="clear">clear</v-btn>
         </v-form>
+        <v-form xs6>
+          <v-card-titel>
+
+          </v-card-titel>
+        </v-form>
+    </v-flex>
     </v-container>
   </v-app>
 </template>
@@ -141,7 +147,7 @@
     },
 
     watch: {
-        date (val) {
+        date () {
         this.dateFormatted = this.formatDate(this.date)
         }
     },
@@ -187,14 +193,14 @@
         formatDate (date) {
         if (!date) return null
 
-        const [year, month, day] = date.split('-')
-        return `${month}/${day}/${year}`
+        const [day, month, year] = date.split('-')
+        return `${day}/${month}/${year}`
         },
         parseDate (date) {
         if (!date) return null
 
-        const [month, day, year] = date.split('/')
-        return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+        const [day, month, year] = date.split('/')
+        return `${day.padStart(2, '0')}-${month.padStart(2, '0')}-${year}`
         }
     }
   }
