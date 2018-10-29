@@ -4,12 +4,12 @@
             <v-layout align-center justify-space-around row fill-height>
                 <v-flex xs6>
                     <v-card>
-                        <router-link to="/RegisterUser" tag="นักปั่น">นักปั่น</router-link>
+                        <router-link to="/registeruser" tag="นักปั่น">นักปั่น</router-link>
                     </v-card>
                  </v-flex>
                  <v-flex xs6>
                     <v-card>
-                        <router-link to="/RegisterOrg" tag="ผู้จัดกิจกรรม">ผู้จัดกิจกรรม</router-link>
+                        <router-link to="/registerorg" tag="ผู้จัดกิจกรรม">ผู้จัดกิจกรรม</router-link>
                     </v-card>
                  </v-flex>
             </v-layout>

@@ -1,92 +1,131 @@
 <template>
     <v-app dark>
-      <v-container>
-      <v-flex xs6>
-            <v-form ref="form" v-model="valid" lazy-validation >
-                <v-text-field
-                v-model="name"
-                :rules="nameRules"
-                label="ชื่อ"
-                required
-                ></v-text-field>
-                <v-text-field
-                v-model="lname"
-                :rules="lnameRules"
-                label="นามสกุล"
-                required
-                ></v-text-field>
-                <v-text-field
-                v-model="phone"
-                :rules="rulesPhone"
-                :counter="10"
-                label="เบอร์มือถือ"
-                required
-                ></v-text-field>
-                <v-flex xs12 lg6>
-                    <v-menu
-                    ref="menu"
-                    :close-on-content-click="false"
-                    v-model="menu"
-                    :nudge-right="40"
-                    lazy
-                    transition="scale-transition"
-                    offset-y
-                    full-width
-                    max-width="290px"
-                    min-width="290px"
-                    >
+      <v-container grid-list-md text-xs-center>
+        <v-layout row wrap>
+        <v-flex xs6 sm6>
+          <v-card>
+            <v-card-title class="title blue-grey lighten-1">กรุณากรอกข้อมูล</v-card-title>
+              <v-card-text>
+                <v-form ref="form" v-model="valid" lazy-validation >
                     <v-text-field
-                        slot="activator"
-                        v-model="dateFormatted"
-                        label="Date"
-                        hint="DD/MM/YYYY format"
-                        persistent-hint
-                        prepend-icon="event"
-                        @blur="date = parseDate(dateFormatted)"
+                    v-model="form.name"
+                    :rules="nameRules"
+                    label="ชื่อ"
+                    required
                     ></v-text-field>
-                    <v-date-picker v-model="date" no-title @input="menu = false"></v-date-picker>
-                    </v-menu>
-                    <p>ปี / เดือน / วัน: <strong>{{ date }}</strong></p>
-                </v-flex>
-                  <v-select
-                  v-model="gender"
-                  :items="items"
-                  :rules="[v => !!v || 'Item is required']"
-                  label="เพศ"
-                  required
-                  ></v-select>
-				<v-flex xs6 class="text-xs-center text-sm-center text-md-center text-lg-center">
-					<img :src="imageUrl" height="150" v-if="imageUrl"/>
-					<v-text-field label="Select Image (รูปบัตรประชาชน)"  @click='pickFile' v-model='images' prepend-icon='attach_file'></v-text-field>
-					<input
-						type="file"
-						style="display: none"
-						ref="image"
-						accept="image/*"
-						@change="onFilePicked"
-					>
-				</v-flex>
-                <v-checkbox
-                v-model="checkboxx"
-                :rules="[v => !!v || 'You must agree to continue!']"
-                label="ยืนยันการสมัครสมาชิก"
-                required
-                ></v-checkbox>
+                    <v-text-field
+                    v-model="form.lname"
+                    :rules="lnameRules"
+                    label="นามสกุล"
+                    required
+                    ></v-text-field>
+                    <v-flex xs6>
+                    <v-text-field
+                    v-model="form.phone"
+                    :rules="rulesPhone"
+                    :counter="10"
+                    label="เบอร์มือถือ"
+                    required
+                    ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 lg6>
+                        <v-menu
+                        ref="menu"
+                        :close-on-content-click="false"
+                        v-model="form.menu"
+                        :nudge-right="40"
+                        lazy
+                        transition="scale-transition"
+                        offset-y
+                        full-width
+                        max-width="290px"
+                        min-width="290px"
+                        >
+                        <v-text-field
+                            slot="activator"
+                            v-model="dateFormatted"
+                            label="Date"
+                            prepend-icon="event"
+                            @blur="date = parseDate(dateFormatted)"
+                        ></v-text-field>
+                        <v-date-picker v-model="date" no-title @input="menu = false"></v-date-picker>
+                        </v-menu>
+                        <p>วันเกิด : ปี / เดือน / วัน: <strong>{{ date }}</strong></p>
+                    </v-flex>
+                    <v-flex xs2>
+                      <v-select
+                      v-model="form.gender"
+                      :items="items"
+                      :rules="[v => !!v || 'Item is required']"
+                      label="เพศ"
+                      required
+                      ></v-select>
+                    </v-flex>
+            <v-flex xs7 class="text-xs-center text-sm-center text-md-center text-lg-center">
+              <img :src="imageUrl" height="150" v-if="imageUrl"/>
+              <v-text-field label="Select Image (รูปบัตรประชาชน)"  @click='pickFile' v-model='form.image' prepend-icon='attach_file'></v-text-field>
+              <input
+                type="file"
+                style="display: none"
+                ref="image"
+                accept="image/*"
+                @change="onFilePicked"
+              >
+            </v-flex>
+                    <v-checkbox
+                    v-model="form.checkboxx"
+                    :rules="[v => !!v || 'You must agree to continue!']"
+                    label="ยืนยันการสมัครสมาชิก"
+                    required
+                    ></v-checkbox>
 
-            <v-btn
-            :disabled="!valid"
-            @click="submit"
-            >
-            submit
-            </v-btn>
-            <v-btn @click="clear">clear</v-btn>
-        </v-form>
-        <v-form xs6>
-          <v-card-titel>
+                <v-btn
+                :disabled="!valid"
+                @click="submit"
+                >
+                submit
+                </v-btn>
+                <v-btn @click="clear">clear</v-btn>
+            </v-form>
+          </v-card-text>
+        </v-card>
+      </v-flex>
 
-          </v-card-titel>
-        </v-form>
-    </v-flex>
+      <v-flex xs6 sm6 >
+        <v-card>
+          <v-card-title class="title blue-grey lighten-1">
+            เงื่อนไขการสมัคร
+          </v-card-title>
+          <v-card-text>
+            1.
+          </v-card-text>
+          <v-card-text>
+            1.
+          </v-card-text>
+          <v-card-text>
+            1.
+          </v-card-text>
+          <v-card-text>
+            1.
+          </v-card-text>
+          <v-card-text>
+            1.
+          </v-card-text>
+          <v-card-text>
+            1.
+          </v-card-text>
+          <v-card-text>
+            1.
+          </v-card-text>
+          <v-card-text>
+            1.
+          </v-card-text>
+          <v-card-text>
+            1.
+          </v-card-text>
+        </v-card>
+      </v-flex>
+      </v-layout>
     </v-container>
   </v-app>
 </template>
@@ -100,9 +139,10 @@
           name : null,
           lname : null,
           phone : null,
+          manu : null,
           dateFormatted : null,
           gender : null,
-          images : null,
+          image : null,
           checkboxx : null,
       },
       submit : false,
@@ -118,15 +158,10 @@
       dateFormatted : vm.formatDate(new Date().toISOString().substr(0, 10)),
       menu : false,
       nameRules : [
-        v => !!v || 'Name is required',
+        v => !!v || 'กรุณากรอกชื่อ',
       ],
       lnameRules: [
-        v => !!v || 'Last name is required',
-      ],
-      email: '',
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+/.test(v) || 'E-mail must be valid'
+        v => !!v || 'กรุณากรอกนามสกุล',
       ],
       select: null,
       items: [
@@ -135,7 +170,7 @@
       ],
       phone: '',
       rulesPhone: [
-          v => !!v || 'Phone is required',
+          v => !!v || 'กรุรากรอกเบอร์โทรศัพท์',
           v => (v && v.length <= 10) || 'Phone must be less than 10 characters'
       ],
     }),
