@@ -6,17 +6,20 @@ import VueRouter from 'vue-router'
 
 import Header from '@/pages/layout/header'
 import Footer from '@/pages/layout/footer'
+
 import Home   from '@/pages/HomePages/home'
 import Events from '@/pages/HomePages/event'
 import Register from '@/pages/HomePages/user/profileOrg'
 // import Login from '@/pages/HomePages/login'
 import Profile from '@/pages/HomePages/user/profileOrg'
+
 import Callback from '@/pages/layout/callback'
+
 // import ProfileUser from '@/pages/HomePages/user/profileUser'
 // import RegiProfileUser from '@/pages/HomePages/user/regiProfileUser'
 // import RegiProfileOrg from '@/pages/HomePages/user/regiProfileOrg'
-import MTBBike from '@/pages/HomePages/mtbBike'
-import RoadBike from '@/pages/HomePages/roadBike'
+import MTB_Bike from '@/pages/HomePages/mtbBike'
+import road_bike from '@/pages/HomePages/roadBike'
 import SelectType from '@/pages/HomePages/selectType'
 import RegisterUser from '@/pages/HomePages/user/registerUser'
 import RegisterOrg from '@/pages/HomePages/user/registerOrg'
@@ -40,8 +43,8 @@ const routes = [
         footer: Footer
     },
     children:[
-      {path : '', name : 'MTBBike',component : MTBBike},
-      {path : '/event/RoadBike', name : 'RoadBike',component : RoadBike}
+      {path : '', name : 'MTBBike',component : MTB_Bike},
+      {path : '/event/road_bike', name : 'RoadBike',component : road_bike}
     ],
   },
   {
@@ -51,15 +54,14 @@ const routes = [
         default: Register,
     }
   },
-  // {
-  //   path: '/login',
-  //   name:'login',
-  //   components: {
-  //       header: Header,
-  //       default: Login,
-  //       footer: Footer
-  //   }
-  // },
+  { 
+      path: '/logout',
+      name: 'logout',
+      beforeEnter: (to, from, next) => {
+          localStorage.clear()
+          next('/')
+      }
+  },
   {
     path: '/profile',
     name:'profile',
@@ -91,7 +93,7 @@ const routes = [
   // },
   {
     path: '/SelectType',
-    name:'selectType',
+    name:'SelectType',
     components: {
         header: Header,
         default: SelectType,

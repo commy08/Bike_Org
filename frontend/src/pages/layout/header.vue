@@ -41,11 +41,13 @@
 <script>
 
 import userStores from '@/stores/userStores'
+import router from "@/router";
 
 export default {
   data: () => ({
     isLogin: true,
     loginline: null,
+    
     items: [
       { title: 'ข้อมูลส่วนตัว',link: '/profile' },
       { title: 'แก้ไขข้อมูล',link: '/edit' },
@@ -56,6 +58,20 @@ export default {
     LoadLinklinelogin: async function() {
       await userStores.dispatch('getLoginLine')
         this.loginline = userStores.state.lineloginline.url;
+    },
+    getUser: async function() {
+      if (!localStorage.access_token) router.push("/");
+      let optionts = {
+        access_token: localStorage.access_token
+      };
+      await userStores.dispatch("getUser", optionts);
+      // console.log(userStores.state.user.user);
+      // console.log(userStores.state.user.status);
+      if (userStores.state.user.status == 200) {
+        this.user = userStores.state.user.user;
+      } else if (userStores.state.user.status == 400) {
+        router.push("/logout");
+      }
     },
   },
   async mounted () {
