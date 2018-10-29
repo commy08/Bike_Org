@@ -4,17 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\User;
+
 class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     *as
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $url = array(
-            'url' => 'https://access.line.me/dialog/oauth/weblogin?response_type=code&client_id=1602409871&redirect_uri=http://192.168.1.102:8080/callback&state=peerapat123456789',
+            'url' => 'https://access.line.me/dialog/oauth/weblogin?response_type=code&client_id=1602409871&redirect_uri=http://192.168.13.101:8080/callback&state=peerapat123456789',
         );
         header('Access-Control-Allow-Origin: *');
         die(json_encode($url));
@@ -26,7 +28,7 @@ class UsersController extends Controller
         $parameter = array(
             'grant_type' => 'authorization_code',
             'code' => trim($_GET['code']),
-            'redirect_uri' => 'http://192.168.1.102:8080/callback',
+            'redirect_uri' => 'http://192.168.13.101:8080/callback',
             'client_id' => '1602409871',
             'client_secret' => '37a7d9312db424eda44f68689373dd9e'
         );
@@ -87,4 +89,78 @@ class UsersController extends Controller
         return $response;
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        return User::find($id);
+    }
+
+
+    public function showUser(Request $request)
+    {
+        $tmp = json_decode(file_get_contents('php://input'));
+        // dd($tmp);
+        return User::find($tmp->id);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $user =  User::find($id);
+         $user->delete();
+    }
 }

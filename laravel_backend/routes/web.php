@@ -17,3 +17,6 @@ Route::get('/', function () {
 
 Route::get('/login', 'UsersController@index');
 Route::get('/callback', 'UsersController@callback');
+
+Route::post('/getUser', 'UsersController@showUser');
+
