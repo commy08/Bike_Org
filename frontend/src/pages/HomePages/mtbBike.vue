@@ -1,37 +1,43 @@
 <template>
     <v-app>
-        <section>
-            <v-container  >
-                <v-layout row>
-                    <v-flax xs12 sm6 offset-lg1>
-                        <v-card class="elevation-1">
-                            <v-card-title class="headline light-green">
-                                <div>
-                                    <div class="headline">University of Phayao Game</div>
-                                    <span class="black-align-text">16/02/61</span>
-                                </div>
-                            </v-card-title>
-                            <v-card>
-                                <img src="@/assets/img/1460953620_20077.jpg" alt="Vuetify.js" contain height="150">
-                            </v-card>
-                            <v-card-actions>
-                                <v-btn flat>ดูรายละเอียด</v-btn>
-                                <v-btn flat color="purple" @click="dialog = !dialog">สมัครเข้าร่วมรายการ</v-btn>
-                                <v-spacer></v-spacer>
-                                <v-btn icon @click="show = !show">
-                                <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
-                                </v-btn>
-                            </v-card-actions>
-                            <v-slide-y-transition>
-                                <v-card-text v-show="show">
-                                    เป็นปีแรกที่ มหาวิทยาลัยพะเยาเข้าแข่งขันกีฬาจักรยาน โดยเป็นไปตามคาดได้รับเหรียญทองจากจักรยานเสือภูเขา 1 เหรียญ 
-                                    และจากจักรยานเสือหมอบ 2 เหรียญ
-                                </v-card-text>
-                            </v-slide-y-transition>
-                        </v-card>
-                    </v-flax>
-                </v-layout>
-            </v-container>
+        <v-container>
+            <v-layout align-start justify-space-around row fill-height>
+                <v-flex v-for="i in 3" :key="`4${i}`" xs3>
+                    <v-card>
+                        <img src="@/assets/img/1460953620_20077.jpg" contain height="194.7">
+                        <!-- <v-img
+                        src="@/assets/img/1460953620_20077.jpg"
+                        height="200px"
+                        aspect-ratio="2"
+                        >
+                        </v-img> -->
+
+                        <v-card-title primary-title>
+                        <div>
+                            <div class="headline">Top western road trips</div>
+                            <span class="grey--text">1,000 miles of wonder</span>
+                        </div>
+                        </v-card-title>
+
+                        <v-card-actions>
+                        <v-btn flat>Share</v-btn>
+                        <v-btn flat color="purple">Explore</v-btn>
+                        <v-spacer></v-spacer>
+                        <v-btn icon @click="show = !show">
+                            <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
+                        </v-btn>
+                        </v-card-actions>
+
+                        <v-slide-y-transition>
+                        <v-card-text v-show="show">
+                            I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
+                        </v-card-text>
+                        </v-slide-y-transition>
+
+                    </v-card>
+                </v-flex>
+            </v-layout>
+        </v-container>
                      <!-- Modal -->
                         <v-dialog v-model="dialog" width="1000px">
                             <v-card>
@@ -96,7 +102,6 @@
                             </v-card>
                         </v-dialog>
                     <!-- End Modal -->
-        </section>
     </v-app>
 </template>
 
@@ -104,7 +109,7 @@
   export default {
     data: () => ({
         dialog: false,
-        show: false,
+        show: [],
     }),
   };
 </script>

@@ -1,7 +1,7 @@
 <template>
     <v-app dark>
       <v-container grid-list-md text-xs-center>
-        <v-layout row wrap>
+        <v-layout row wrap justify-center>
         <v-flex xs6 sm6>
           <v-card>
             <v-card-title class="title blue-grey lighten-1">กรุณากรอกข้อมูล</v-card-title>
@@ -19,7 +19,7 @@
                     label="นามสกุล"
                     required
                     ></v-text-field>
-                    <v-flex xs6>
+                    <v-flex sm6>
                     <v-text-field
                     v-model="form.phone"
                     :rules="rulesPhone"
@@ -28,6 +28,12 @@
                     required
                     ></v-text-field>
                     </v-flex>
+                    <v-text-field
+                    v-model="form.address"
+                    :rules="rulesAddress"
+                    label="ที่อยู่"
+                    required
+                    ></v-text-field>
                     <v-flex xs12 lg6>
                         <v-menu
                         ref="menu"
@@ -66,7 +72,6 @@
               <img :src="imageUrl" height="150" v-if="imageUrl"/>
               <v-text-field label="Select Image" @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
               <input
-
                 type="file"
                 style="display: none"
                 ref="image"
@@ -93,13 +98,26 @@
                     required
                     ></v-checkbox>
 
-                <v-btn
-                :disabled="!valid"
-                @click="submit"
-                >
-                submit
-                </v-btn>
-                <v-btn @click="clear" >clear</v-btn>
+                <!-- dialog -->
+                  <v-dialog v-model="dialog" persistent max-width="290">
+                    <v-btn slot="activator" :disabled="!valid" dark>ตกลง</v-btn>
+                    <v-card>
+                      <v-card-title class="headline blue-grey lighten-1">ยืนยันการสมัครสมาชิก</v-card-title>
+                      <v-card-text>{{ form.name }}</v-card-text>
+                      <v-card-text>{{ form.lname }}</v-card-text>
+                      <v-card-text>{{ form.phone }}</v-card-text>
+                      <v-card-text>{{ form.select }}</v-card-text>
+                      <!-- <v-card-text>{{ form.imageUrl }}</v-card-text>
+                      <v-card-text>{{ form.imageUrlEntre }}</v-card-text> -->
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="blue darken-3" flat  @click="Submit();" @click.native="dialog = false">ยืนยันการสมัคร</v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
+                <!-- end dialog -->
+
+                <v-btn @click="clear" >ยกเลิก</v-btn>
             </v-form>
           </v-card-text>
         </v-card>
@@ -113,30 +131,6 @@
           <v-card-text>
             1.
           </v-card-text>
-          <v-card-text>
-            1.
-          </v-card-text>
-          <v-card-text>
-            1.
-          </v-card-text>
-          <v-card-text>
-            1.
-          </v-card-text>
-          <v-card-text>
-            1.
-          </v-card-text>
-          <v-card-text>
-            1.
-          </v-card-text>
-          <v-card-text>
-            1.
-          </v-card-text>
-          <v-card-text>
-            1.
-          </v-card-text>
-          <v-card-text>
-            1.
-          </v-card-text>
         </v-card>
       </v-flex>
       </v-layout>
@@ -145,19 +139,22 @@
 </template>
 
 <script>
-  import axios from 'axios'
+
+  import userStores from '@/stores/userStores'
+  import router from "@/router";
 
   export default {
     data: vm => ({
+      dialog: false,
       form : {
           name : null,
           lname : null,
           phone : null,
-          manu : null,
-          select : null,
+          address : null,
+          gender : null,
           image : null,
           imageEnter : null,
-          checkboxx : null,
+          checkbox : null,
       },
       submit : false,
 
@@ -190,7 +187,7 @@
       ],
       phone: '',
       rulesPhone: [
-          v => !!v || 'กรุรากรอกเบอร์โทรศัพท์',
+          v => !!v || 'กรุณากรอกเบอร์โทรศัพท์',
           v => (v && v.length <= 10) || 'Phone must be less than 10 characters'
       ],
     }),
@@ -208,19 +205,21 @@
     },
 
     methods: {
-      submit () {
-        // console.log(form)
-        if (this.$refs.form.validate()) {
-          // Native form submission is not yet supported
-          axios.post('/api/submit', {
-            name: this.name,
-            lname: this.lname,
-            phone: this.phone,
-            manu: this.manu,
-            select: this.select,
-            checkbox: this.checkbox
-          })
+      Submit: async function() {
+        
+        if (!localStorage.access_token) router.push("/");
+        let optionts = {
+          access_token: localStorage.access_token,
+          form: this.form
+        };
+        // console.log(optionts)
+        await userStores.dispatch("registerOrg", optionts);
+        if (userStores.state.registerOrg.status == 200) {
+          alert("success")
+        } else if (userStores.state.registerOrg.status == 400) {
+          router.push("/logout");
         }
+        
       },
       clear () {
         this.$refs.form.reset()

@@ -3,13 +3,13 @@
         <v-container grid-list-md text-xs-center>
             <v-layout align-center justify-space-around row fill-height>
                 <v-flex xs6>
-                    <v-card>
-                        <router-link to="/registeruser" tag="นักปั่น">นักปั่น</router-link>
+                    <v-card class="height=200px">
+                        <router-link to="/registeruser" tag="div">นักปั่น</router-link>
                     </v-card>
                  </v-flex>
                  <v-flex xs6>
                     <v-card>
-                        <router-link to="/registerorg" tag="ผู้จัดกิจกรรม">ผู้จัดกิจกรรม</router-link>
+                        <router-link to="/registerorg" tag="div">ผู้จัดกิจกรรม</router-link>
                     </v-card>
                  </v-flex>
             </v-layout>

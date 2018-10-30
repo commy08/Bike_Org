@@ -7,8 +7,10 @@ Vue.use(Vuex)
 const userStores = new Vuex.Store({
   state: {
       user : [],
+      registerOrg : [],
+      registerUser : [],
       access_token : [],
-      lineloginline: null
+      lineloginline : null,
   },
   mutations: {
       // setPosts(state,posts) {
@@ -23,6 +25,12 @@ const userStores = new Vuex.Store({
       getUser(state, data) {
           state.user = data
       },
+      registerOrg(state, data){
+        state.registerOrg = data
+      },
+      registerUser(state, data){
+        state.registerUser = data
+      }
   },
   actions: {
       async getLoginLine(context) {
@@ -38,10 +46,22 @@ const userStores = new Vuex.Store({
           context.commit("getTokenLine", data)
       },
       async getUser(context, options) {
-          let data = await axios.post("http://localhost/PayReminder/api/v2/line/getUser",options,{headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}}).then((r) => {
+          let data = await axios.post("http://192.168.13.100:8080/getUser",options,{headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}}).then((r) => {
               return r.data
           })
           context.commit("getUser", data)
+      },
+      async registerOrg(context, options) {
+        let data = await axios.post("http://192.168.13.100:8080/registerOrg",options,{headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}}).then((r) => {
+            return r.data
+        })
+        context.commit("registerOrg", data)
+      },
+      async registerUser(context, options) {
+        let data = await axios.post("http://192.168.13.100:8080/registerUser",options,{headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}}).then((r) => {
+            return r.data
+        })
+        context.commit("registerUser", data)
       },
   }
 })

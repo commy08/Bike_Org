@@ -1,5 +1,5 @@
 <template>
-        <section>
+        <v-content>
             <v-toolbar>
                 <v-toolbar-title  class="font-weight-black font-italic headline" style="width:250px">
                      <router-link to="/" type="icon">BIKE - ORGENIZE</router-link>
@@ -12,15 +12,16 @@
                         label="Search"
                         class="hidden-sm-and-down">
                     </v-text-field>
-                <router-link to="/event" tag="รายการแข่งขัน">
+                <router-link to="/event" tag="a">
                     <v-btn class="blue lighten-1">รายการแข่งขัน</v-btn>
                 </router-link>
-                <a :href="loginline">
+                
+                <a v-if="user.id == null" :href="loginline">
                     <v-btn  class="light-green accent-4">เข้าสู่ระบบผ่าน Line</v-btn>                   
                 </a>
 
-                <!-- <v-menu offset-y>
-                    <v-btn dark color="light-green accent-4" slot="activator">Welcome</v-btn>
+                <v-menu v-else offset-y>
+                    <v-btn dark color="light-green accent-4" slot="activator">{{ user.firstname+" "+user.lastname }}</v-btn>
                     <v-list>
                         <v-list-tile
                         v-for="(item, index) in items"
@@ -29,10 +30,9 @@
                         <v-list-tile-title ><a class="btn" color="light-green accent-4" :href="item.link">{{ item.title }}</a></v-list-tile-title>
                         </v-list-tile>
                     </v-list>
-                </v-menu> -->
-
+                </v-menu>
             </v-toolbar>
-        </section>
+        </v-content>
         
 </template>
 
@@ -47,6 +47,7 @@ export default {
   data: () => ({
     isLogin: true,
     loginline: null,
+    user: [],
     
     items: [
       { title: 'ข้อมูลส่วนตัว',link: '/profile' },
@@ -68,7 +69,7 @@ export default {
       // console.log(userStores.state.user.user);
       // console.log(userStores.state.user.status);
       if (userStores.state.user.status == 200) {
-        this.user = userStores.state.user.user;
+        this.user = userStores.state.user;
       } else if (userStores.state.user.status == 400) {
         router.push("/logout");
       }
@@ -76,6 +77,7 @@ export default {
   },
   async mounted () {
     await this.LoadLinklinelogin()
+    await this.getUser()
     // console.log(this.loginline);
   },
 };

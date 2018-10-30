@@ -22,7 +22,7 @@ export default {
   data(){
       return {
         name: null,
-        picture: null,
+        // picture: null,
       }
   },
   methods: {

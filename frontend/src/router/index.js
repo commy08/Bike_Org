@@ -7,7 +7,7 @@ import VueRouter from 'vue-router'
 import Header from '@/pages/layout/header'
 import Footer from '@/pages/layout/footer'
 
-import Home   from '@/pages/HomePages/home'
+import Home from '@/pages/HomePages/home'
 import Events from '@/pages/HomePages/event'
 import Register from '@/pages/HomePages/user/profileOrg'
 // import Login from '@/pages/HomePages/login'
