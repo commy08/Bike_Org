@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
@@ -47,7 +48,8 @@ class UsersController extends Controller
             #ถ้าเกิดเข้าสู้ระบบสำเร็จ
             $output = array(
                 'status' => 200,
-                'msg' => 'Success'
+                'msg' => 'Success',
+                'access_token' => $accessToken
             );
             header('Access-Control-Allow-Origin: *');
             die(json_encode($output));
@@ -121,12 +123,71 @@ class UsersController extends Controller
         return User::find($id);
     }
 
+    // public function registerUser(Request $request){
+    //     $tmp = json_decode(file_get_contents('php://input'));
+    //     $user = $this->showUser($request,true);
 
-    public function showUser(Request $request)
+    //     DB::table('users')
+    //     ->where('id', $user->id)
+    //     ->update(
+    //         ['firstname' => $tmp->name],
+    //         ['lastname' => $tmp->lname],
+    //         ['tel' => $tmp->phone],
+    //         ['sex' => $tmp->select]
+    //         // ['OrgName' => $tmp->OrgName]
+    //     );
+
+    //     header('Access-Control-Allow-Origin: *');
+    //     die();
+    // }
+
+    public function registerOrg(Request $request){
+        $tmp = json_decode(file_get_contents('php://input'));
+        $user = $this->showUser($request,true);
+
+        DB::table('users')
+        ->where('id', $user->id)
+        ->update(
+            ['firstname' => $tmp->name,
+            'lastname' => $tmp->lname,
+            'tel' => $tmp->phone,
+            'sex' => $tmp->gender]
+            // ['OrgName' => $tmp->OrgName]
+        );
+
+        header('Access-Control-Allow-Origin: *');
+        die();
+    }
+
+
+    public function showUser(Request $request,$system=false)
     {
         $tmp = json_decode(file_get_contents('php://input'));
-        // dd($tmp);
-        return User::find($tmp->id);
+        $getUser = $this->getProfile($tmp->access_token);
+        $db = DB::table('users')->where('line_id',$getUser->userId);
+        $count = $db->count();
+        $users = $db->get();
+        if ($count == 0){
+            // DB::table('users')->insert(
+            //     [
+            //         'line_id' => $getUser->userId,
+            //         'firstname' => $getUser->displayName,
+            //         'line_pic' => $getUser->pictureUrl,
+            //         'line_token' => null
+            //     ]
+            // );
+            $nerd = new User;
+            $nerd->line_id       = $getUser->userId;
+            $nerd->firstname      = $getUser->displayName;
+            $nerd->line_pic = $getUser->pictureUrl;
+            $nerd->save();
+            $db = DB::table('users')->where('line_id',$getUser->userId);
+            $users = $db->get();
+        }
+        $users[0]->status = 200;
+        if($system) return $users[0];
+        header('Access-Control-Allow-Origin: *');
+        die(json_encode($users[0]));
     }
 
     /**
