@@ -1,25 +1,23 @@
 import 'vuetify/dist/vuetify.min.css'
 import VueRouter from 'vue-router'
 
-// import index from '@/pages/mainIndex'
-// import list from '@/pages/HomePages/list'
-
 import Header from '@/pages/layout/header'
 import Footer from '@/pages/layout/footer'
 
 import Home from '@/pages/HomePages/home'
-import Events from '@/pages/HomePages/event'
+
 import Register from '@/pages/HomePages/user/profileOrg'
-// import Login from '@/pages/HomePages/login'
-import Profile from '@/pages/HomePages/user/profileOrg'
 
 import Callback from '@/pages/layout/callback'
 
-// import ProfileUser from '@/pages/HomePages/user/profileUser'
-// import RegiProfileUser from '@/pages/HomePages/user/regiProfileUser'
-// import RegiProfileOrg from '@/pages/HomePages/user/regiProfileOrg'
+import ProfileUser from '@/pages/HomePages/user/profileUser'
+import RegiProfileUser from '@/pages/HomePages/user/regiProfileUser'
+import profileOrg1 from '@/pages/HomePages/user/profileOrg1'
+
+import Events from '@/pages/HomePages/event'
 import MTB_Bike from '@/pages/HomePages/mtbBike'
 import road_bike from '@/pages/HomePages/roadBike'
+
 import SelectType from '@/pages/HomePages/selectType'
 import RegisterUser from '@/pages/HomePages/user/registerUser'
 import RegisterOrg from '@/pages/HomePages/user/registerOrg'
@@ -63,34 +61,25 @@ const routes = [
       }
   },
   {
-    path: '/profile',
-    name:'profile',
-    components: {
-        header: Header,
-        default: Profile,
-        footer: Footer
-    }
-  },
-  {
     path: '/callback',
     name:'callback',
     components: {
         default: Callback,
     }
   },
-  // {
-  //   path: '/ProfileUser',
-  //   name:'profileuser',
-  //   components: {
-  //       header: Header,
-  //       default: ProfileUser,
-  //       footer: Footer
-  //   },
-  //   children:[
-  //     { path : '', name : 'RegiProfileUser',component : RegiProfileUser },
-  //     { path : '/profileUser/regiProfileOrg', name : 'RegiProfileOrg',component : RegiProfileOrg }
-  //   ],
-  // },
+  {
+    path: '/ProfileUser',
+    name:'profileuser',
+    components: {
+        header: Header,
+        default: ProfileUser,
+        footer: Footer
+    },
+    children:[
+      { path : '', name : 'RegiProfileUser',component : RegiProfileUser },
+      { path : '/profileUser/profileOrg1', name : 'profileOrg1',component : profileOrg1 }
+    ],
+  },
   {
     path: '/SelectType',
     name:'SelectType',
