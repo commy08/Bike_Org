@@ -17,7 +17,7 @@ class UsersController extends Controller
     public function index()
     {
         $url = array(
-            'url' => 'https://access.line.me/dialog/oauth/weblogin?response_type=code&client_id=1602409871&redirect_uri=http://192.168.13.101:8080/callback&state=peerapat123456789',
+            'url' => 'https://access.line.me/dialog/oauth/weblogin?response_type=code&client_id=1602409871&redirect_uri=http://192.168.1.7:8081/callback&state=peerapat123456789',
         );
         header('Access-Control-Allow-Origin: *');
         die(json_encode($url));
@@ -29,7 +29,7 @@ class UsersController extends Controller
         $parameter = array(
             'grant_type' => 'authorization_code',
             'code' => trim($_GET['code']),
-            'redirect_uri' => 'http://192.168.13.101:8080/callback',
+            'redirect_uri' => 'http://192.168.1.7:8081/callback',
             'client_id' => '1602409871',
             'client_secret' => '37a7d9312db424eda44f68689373dd9e'
         );
@@ -140,20 +140,29 @@ class UsersController extends Controller
     //     header('Access-Control-Allow-Origin: *');
     //     die();
     // }
-
+    private function getProfileID($access_token){
+        if($access_token){
+            $response = $this->curl('https://api.line.me/v2/profile',array(),'GET',array('Authorization: Bearer '.$access_token));
+            return $response;
+        }else{
+            return null;
+        }
+        //  return isset($response->userId) ? $response: FALSE;
+    }
     public function registerOrg(Request $request){
-        $tmp = json_decode(file_get_contents('php://input'));
-        $user = $this->showUser($request,true);
+        $getUser = $this->getProfileID($request->access_token);
+        $line_id  =  json_decode($getUser,true);
+        $id =  $line_id['userId'];
+        echo "Line id = ".$id."<br>";
+        $form =  $request->form;
 
-        DB::table('users')
-        ->where('id', $user->id)
-        ->update(
-            ['firstname' => $tmp->name,
-            'lastname' => $tmp->lname,
-            'tel' => $tmp->phone,
-            'sex' => $tmp->gender]
-            // ['OrgName' => $tmp->OrgName]
+        $db = User::where('line_id',$id)->update(
+            ['firstname' => $form['firstname'],
+            'lastname' =>$form['lastname'],
+            'tel' =>$form['tel'],
+            'sex' => $form['sex']]
         );
+        return $db;
 
         header('Access-Control-Allow-Origin: *');
         die();

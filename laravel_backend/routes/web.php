@@ -22,4 +22,4 @@ Route::post('/getUser', 'UsersController@showUser');
 Route::post('/registerOrg','UsersController@registerOrg');
 // Route::post('/registerUser','UsersController@registerUser');
 
-
+Route::resource('/full', 'User/UsersController');
