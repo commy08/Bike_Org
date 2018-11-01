@@ -6,7 +6,9 @@ import Footer from '@/pages/layout/footer'
 
 import Home from '@/pages/HomePages/home'
 
-import Register from '@/pages/HomePages/user/profileOrg'
+import ProfileOrg from '@/pages/HomePages/user/profileOrg'
+// import Addevents from '@/pages/HomePages/addevents'
+// import Checkevent from '@/pages/HomePages/checkevent'
 
 import Callback from '@/pages/layout/callback'
 
@@ -49,8 +51,8 @@ const routes = [
     path: '/profileOrg',
     name:'profileOrg',
     components: {
-        default: Register,
-    }
+        default: ProfileOrg
+    },
   },
   { 
       path: '/logout',

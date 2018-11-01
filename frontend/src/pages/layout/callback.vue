@@ -48,7 +48,24 @@ export default {
         router.push('/') 
       }
     },
-    
+    getUser: async function() {
+      if (!localStorage.access_token) router.push("/");
+      let optionts = {
+        access_token: localStorage.access_token
+      };
+      await userStores.dispatch("getUser", optionts);
+      // console.log(userStores.state.user.user);
+      // console.log(userStores.state.user.status);
+      if (userStores.state.user.status == 200) {
+        if(userStores.state.user.type == 'o'){
+          router.push("/");
+        }
+        if(userStores.state.user.type == 'r'){
+           router.push("/");
+         }
+      } else if (userStores.state.user.status == 400) 
+        router.push("/logout");
+      }
   },
   async mounted () {
     await this.getTokenLine()

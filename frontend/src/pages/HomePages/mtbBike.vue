@@ -44,7 +44,6 @@
 <script>
   export default {
     data: () => ({
-        dialog: false,
         show: false,
     }),
   };

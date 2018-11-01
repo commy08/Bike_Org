@@ -15,6 +15,7 @@
                     </div>
                 </v-flex>
             </v-layout>
+            
             <v-card light>
                     <v-layout justify-space-around>
                         <router-link to="/checkuser">สมัครสมาชิกทั่วไป</router-link>

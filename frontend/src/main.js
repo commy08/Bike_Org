@@ -2,7 +2,7 @@ import '@babel/polyfill'
 import Vue from 'vue'
 
 import './plugins/vuetify'
-
+import "./assets/custom.css"
 // import '~vuetify/src/stylus/main'
 
 // import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader

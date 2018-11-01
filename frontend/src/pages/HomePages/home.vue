@@ -70,10 +70,11 @@
 
     <section>
       <v-parallax src="https://www.filmhousecinema.com/sites/filmhousecinema.com/files/shows/2017/Mountain-3.jpg" alt="background">
-          <v-layout column wrap align-center >
+          <v-flex>
+             <v-layout column wrap align-center >
             <v-flax xs12 class="my-5">
               <div class="text-xs-center">
-                <h2 class="headline">เกี่ยวกับ BIKE - ORGANIZER</h2>
+                <h2 class="headline">เกี่ยวกับ BIKE - ORGANIZE</h2>
               </div>
             </v-flax>
           </v-layout>
@@ -83,10 +84,10 @@
                   <v-flex xs12 md6>
                     <div class="text-xs-center elevation-0 transparent" >
                       <v-avatar size="125px">
-                        <img class="img-circle elevation-24 mb-5" src="https://raw.githubusercontent.com/vuetifyjs/docs/dev/static/doc-images/lists/1.jpg">
+                        <img class="img-circle elevation-24 mb-5" src="https://scontent.fbkk1-5.fna.fbcdn.net/v/t1.0-9/12832290_538790829623686_8041543728812996744_n.jpg?_nc_cat=102&_nc_eui2=AeFQNFRf4SUSsUJmSEgCSaHPKHpqC51kOqITiCrSAeYjGqLs98q62A0savGJ9oL5ug8t95lRQ460T3lsUyIA-GBndAmP5Xdp9xIofRK33AiFCg&_nc_ht=scontent.fbkk1-5.fna&oh=3449f0357b0dc38aff5d8fa1e09e3e8a&oe=5C79F292">
                       </v-avatar>
-                      <div class="headline">John <span style="font-weight:bold">Doe</span></div>
-                        <div class="subheading text-xs-center pt-2 pb-5">Lorem ipsum dolor sit amet</div>
+                      <div class="headline" style="font-weight:bold">Teerapat  <span>Injai</span></div>
+                        <!-- <div class="subheading text-xs-center pt-2 pb-5">Lorem ipsum dolor sit amet</div> -->
                         <!-- <v-layout justify-space-between>
                           <a href="javascript:;" class="body-2">Home</a>
                           <a href="javascript:;" class="body-2">About</a>
@@ -99,10 +100,10 @@
                   <v-flex xs12 md6>
                     <div class="text-xs-center elevation-0 transparent" >
                       <v-avatar size="125px">
-                        <img class="img-circle elevation-24 mb-5" src="https://raw.githubusercontent.com/vuetifyjs/docs/dev/static/doc-images/lists/1.jpg">
+                        <img class="img-circle elevation-24 mb-5" src="https://scontent.fbkk1-5.fna.fbcdn.net/v/t1.0-9/38412095_2175362869342421_8893393646578040832_n.jpg?_nc_cat=111&_nc_eui2=AeHmMGpnzlNU47nr2bOyVotK_ppDMSATJnNj7VWj4DdT_mvK4O9OUxCgLlZ12KIb6AUQa9RZ9j_nU93M0zkwOpd9XDJg14hMyrRHQfZcawp5WQ&_nc_ht=scontent.fbkk1-5.fna&oh=8afc0e755f26be639dfa526f72280f1c&oe=5C84DAAE">
                       </v-avatar>
-                      <div class="headline">John <span style="font-weight:bold">Doe</span></div>
-                        <div class="subheading text-xs-center pt-2 pb-5">Lorem ipsum dolor sit amet</div>
+                      <div class="headline"  style="font-weight:bold">Noppawong  <span>Surintham</span></div>
+                        <!-- <div class="subheading text-xs-center pt-2 pb-5">Lorem ipsum dolor sit amet</div> -->
                         <!-- <v-layout justify-space-between>
                           <a href="javascript:;" class="body-2">Home</a>
                           <a href="javascript:;" class="body-2">About</a>
@@ -114,6 +115,7 @@
                 </v-layout>
               </v-container>
             </v-flax>
+          </v-flex>
       </v-parallax>
     </section>
 
