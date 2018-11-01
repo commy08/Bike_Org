@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('type',1);
             $table->string('firstname',100);
             $table->string('lastname',100);
-            $table->enum('sex',['male','female']);
+            $table->string('sex');
             $table->text('address');
             $table->date('birthday');
             $table->text('picID');

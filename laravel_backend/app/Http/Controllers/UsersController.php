@@ -17,7 +17,7 @@ class UsersController extends Controller
     public function index()
     {
         $url = array(
-            'url' => 'https://access.line.me/dialog/oauth/weblogin?response_type=code&client_id=1602409871&redirect_uri=http://192.168.1.7:8081/callback&state=peerapat123456789',
+            'url' => 'https://access.line.me/dialog/oauth/weblogin?response_type=code&client_id=1602409871&redirect_uri=http://192.168.1.100:8080/callback&state=peerapat123456789',
         );
         header('Access-Control-Allow-Origin: *');
         die(json_encode($url));
@@ -29,7 +29,7 @@ class UsersController extends Controller
         $parameter = array(
             'grant_type' => 'authorization_code',
             'code' => trim($_GET['code']),
-            'redirect_uri' => 'http://192.168.1.7:8081/callback',
+            'redirect_uri' => 'http://192.168.1.100:8080/callback',
             'client_id' => '1602409871',
             'client_secret' => '37a7d9312db424eda44f68689373dd9e'
         );
@@ -123,23 +123,53 @@ class UsersController extends Controller
         return User::find($id);
     }
 
-    // public function registerUser(Request $request){
-    //     $tmp = json_decode(file_get_contents('php://input'));
-    //     $user = $this->showUser($request,true);
+    public function registerUser(Request $request){
+        // $tmp = json_decode(file_get_contents('php://input'));
+        // $user = $this->showUser($request,true);
 
-    //     DB::table('users')
-    //     ->where('id', $user->id)
-    //     ->update(
-    //         ['firstname' => $tmp->name],
-    //         ['lastname' => $tmp->lname],
-    //         ['tel' => $tmp->phone],
-    //         ['sex' => $tmp->select]
-    //         // ['OrgName' => $tmp->OrgName]
-    //     );
+        // DB::table('users')
+        // ->where('id', $user->id)
+        // ->update(
+        //     [
+        //         'firstname' => $tmp->firstname,
+        //         'lastname' => $tmp->lastname,
+        //         'tel' =>$form['tel'],
+        //         'sex' => $form['sex'],
+        //         'address' => $form['address'],
+        //         'birthday' => $form['date'],
+        //         'type' => 'r'
+        //     ]
+        // );
 
-    //     header('Access-Control-Allow-Origin: *');
-    //     die();
-    // }
+        // header('Access-Control-Allow-Origin: *');
+        // die();
+
+        $tmp = json_decode(file_get_contents('php://input'),true);
+        $getUser = $this->getProfile($tmp['access_token']);
+        // $line_id  =  json_decode($getUser,true);
+        $id =  $getUser->userId;
+        // echo "Line id = ".$id."<br>";
+        $form =  $tmp['form'];
+        // print_r($form);
+        // die();
+
+        $db = User::where('line_id',$id)->update(
+            [
+                'firstname' => $form['firstname'],
+                'lastname' =>$form['lastname'],
+                'tel' =>$form['tel'],
+                'sex' => $form['sex'],
+                'address' => $form['address'],
+                'birthday' => $form['date'],
+                'picID' => $form['picID'],
+                'type' => 'r'
+            ]
+        );
+        // return $db;
+
+        header('Access-Control-Allow-Origin: *');
+        die(json_encode(['status'=>true]));
+    }
     private function getProfileID($access_token){
         if($access_token){
             $response = $this->curl('https://api.line.me/v2/profile',array(),'GET',array('Authorization: Bearer '.$access_token));
@@ -150,53 +180,68 @@ class UsersController extends Controller
         //  return isset($response->userId) ? $response: FALSE;
     }
     public function registerOrg(Request $request){
-        $getUser = $this->getProfileID($request->access_token);
-        $line_id  =  json_decode($getUser,true);
-        $id =  $line_id['userId'];
-        echo "Line id = ".$id."<br>";
-        $form =  $request->form;
+        $tmp = json_decode(file_get_contents('php://input'),true);
+        $getUser = $this->getProfile($tmp['access_token']);
+        // $line_id  =  json_decode($getUser,true);
+        $id =  $getUser->userId;
+        // echo "Line id = ".$id."<br>";
+        $form =  $tmp['form'];
+        // print_r($form);
+        // die();
 
         $db = User::where('line_id',$id)->update(
-            ['firstname' => $form['firstname'],
-            'lastname' =>$form['lastname'],
-            'tel' =>$form['tel'],
-            'sex' => $form['sex']]
+            [
+                'firstname' => $form['firstname'],
+                'lastname' =>$form['lastname'],
+                'tel' =>$form['tel'],
+                'sex' => $form['sex'],
+                'address' => $form['address'],
+                'birthday' => $form['date'],
+                'tradeNum' => $form['tradeNum'],
+                'OrgName' => $form['OrgName'],
+                'picID' => $form['picID'],
+                'picORG' => $form['picORG'],
+                'type' => 'o'
+            ]
         );
-        return $db;
+        // return $db;
 
         header('Access-Control-Allow-Origin: *');
-        die();
+        die(json_encode(['status'=>true]));
     }
 
 
     public function showUser(Request $request,$system=false)
     {
-        $tmp = json_decode(file_get_contents('php://input'));
-        $getUser = $this->getProfile($tmp->access_token);
-        $db = DB::table('users')->where('line_id',$getUser->userId);
+
+        $tmp = json_decode(file_get_contents('php://input'),true);
+        //$tmp = json_decode(file_get_contents('php://input'));
+        $getUser = $this->getProfileID( $tmp['access_token']);
+
+        $uu = json_decode($getUser,true);
+        $line_id = $uu['userId'];
+
+        $db = DB::table('users')->where('line_id',$line_id);
         $count = $db->count();
         $users = $db->get();
         if ($count == 0){
-            // DB::table('users')->insert(
-            //     [
-            //         'line_id' => $getUser->userId,
-            //         'firstname' => $getUser->displayName,
-            //         'line_pic' => $getUser->pictureUrl,
-            //         'line_token' => null
-            //     ]
-            // );
-            $nerd = new User;
-            $nerd->line_id       = $getUser->userId;
-            $nerd->firstname      = $getUser->displayName;
-            $nerd->line_pic = $getUser->pictureUrl;
-            $nerd->save();
-            $db = DB::table('users')->where('line_id',$getUser->userId);
-            $users = $db->get();
+
+            $user = new User();
+            $user->line_id = $uu['userId'];
+            $user->firstname = $uu['displayName'];
+            $user->line_pic = $uu['pictureUrl'];
+            $user->save();
+           // $db = DB::table('users')->where('line_id',$line_id);
+            //$users = $db->get();
         }
-        $users[0]->status = 200;
-        if($system) return $users[0];
+
+        //$users[0]->status = 200;
+        //if($system) return $users[0];
+
+        //die(json_encode($users[0]));
         header('Access-Control-Allow-Origin: *');
         die(json_encode($users[0]));
+
     }
 
     /**
