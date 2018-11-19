@@ -98,6 +98,7 @@
                       <v-btn slot="activator" :disabled="!valid" dark>ตกลง</v-btn>
                       <v-card>
                         <v-card-title class="headline blue-grey lighten-1">ยืนยันการสมัครสมาชิก</v-card-title>
+                        <v-spacer></v-spacer>
                         <v-card-text>{{ form.firstname }}</v-card-text>
                         <v-card-text>{{ form.lastname }}</v-card-text>
                         <v-card-text>{{ form.tel }}</v-card-text>
@@ -105,7 +106,7 @@
                         <v-card-text>{{ date }}</v-card-text>
                         <v-card-text>{{ form.sex }}</v-card-text>
                         <v-card-text>
-                          <img :src="form.picID" height="150"  />
+                          <img :src="imageUrl" height="150"  />
                         </v-card-text>
                         <v-card-actions>
                           <v-spacer></v-spacer>
@@ -193,12 +194,14 @@ export default {
       if (!localStorage.access_token) router.push("/");
       let optionts = {
         access_token: localStorage.access_token,
-        form: this.form
+        form: this.form,
       };
       // console.log(optionts)
       await userStores.dispatch("registerUser", optionts);
-      if (userStores.state.registerUer.status == 200) {
-        alert("success");
+      // console.log(userStores.state.registerUser)
+      if (userStores.state.registerUser.status ) {
+        alert("สมัครสมาชิกเสร็จสิ้น");
+        router.go("/");
       } else if (userStores.state.registerUser.status == 400) {
         router.push("/logout");
       }
@@ -221,6 +224,7 @@ export default {
         fr.onload = e => {
           fr.onload = e => {
           this.form.picID = e.target.result;
+          // console.log(this.form.picID);
         };
           this.imageData = e.target.result;
         };

@@ -7,20 +7,19 @@ import Footer from '@/pages/layout/footer'
 import Home from '@/pages/HomePages/home'
 
 import ProfileOrg from '@/pages/HomePages/user/profileOrg'
-// import Addevents from '@/pages/HomePages/addevents'
-// import Checkevent from '@/pages/HomePages/checkevent'
+import Addevent from '@/pages/HomePages/user/addevent'
+import Amound from '@/pages/HomePages/user/amound'
 
 import Callback from '@/pages/layout/callback'
 
 import ProfileUser from '@/pages/HomePages/user/profileUser'
-import RegiProfileUser from '@/pages/HomePages/user/regiProfileUser'
-import profileOrg1 from '@/pages/HomePages/user/profileOrg1'
+// import RegiProfileUser from '@/pages/HomePages/user/regiProfileUser'
 
 import Events from '@/pages/HomePages/event'
 import MTB_Bike from '@/pages/HomePages/mtbBike'
 import road_bike from '@/pages/HomePages/roadBike'
 
-import SelectType from '@/pages/HomePages/selectType'
+import selecttype from '@/pages/HomePages/selectType'
 import RegisterUser from '@/pages/HomePages/user/registerUser'
 import RegisterOrg from '@/pages/HomePages/user/registerOrg'
 
@@ -51,8 +50,15 @@ const routes = [
     path: '/profileOrg',
     name:'profileOrg',
     components: {
-        default: ProfileOrg
+        header: Header,
+        default: ProfileOrg,
+        footer: Footer
     },
+    children:[
+      {path : '/', name : 'event',component : event},
+      {path : '/profileOrg/addevent', name : 'addevent',component : Addevent},
+      {path : '/profileOrg/amound', name : 'amound',component : Amound}
+    ],
   },
   { 
       path: '/logout',
@@ -70,24 +76,24 @@ const routes = [
     }
   },
   {
-    path: '/ProfileUser',
+    path: '/profileuser',
     name:'profileuser',
     components: {
         header: Header,
         default: ProfileUser,
         footer: Footer
     },
-    children:[
-      { path : '', name : 'RegiProfileUser',component : RegiProfileUser },
-      { path : '/profileUser/profileOrg1', name : 'profileOrg1',component : profileOrg1 }
-    ],
+    // children:[
+    //   { path : '', name : 'RegiProfileUser',component : RegiProfileUser },
+    //   { path : '/profileUser/profileOrg1', name : 'profileOrg1',component : profileOrg1 }
+    // ],
   },
   {
-    path: '/SelectType',
-    name:'SelectType',
+    path: '/selecttype',
+    name:'selecttype',
     components: {
         header: Header,
-        default: SelectType,
+        default: selecttype,
         footer: Footer
     }
   },

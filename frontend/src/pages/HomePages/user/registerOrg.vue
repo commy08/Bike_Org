@@ -86,7 +86,6 @@
                     :counter="13"
                     :maxlength="13"
                     label="เลขใบทะเบียนพาณิชย์"
-                    mask="phone"
                     required
                     ></v-text-field>
                     </v-flex>
@@ -191,7 +190,7 @@ export default {
       checkbox: null,
       date: null
     },
-    submit: false,
+    Submit: false,
 
     titlePicOrg: "Image Upload",
     imageNameOrg: "",
@@ -238,9 +237,9 @@ export default {
       };
       // console.log(optionts)
       await userStores.dispatch("registerOrg", optionts);
-      if (userStores.state.registerOrg.status == true) {
-        router.push("/");
-        // alert("success")
+      if (userStores.state.registerUser.status) {
+        alert("สมัครสมาชิกเสร็จสิ้น");
+        router.go("/");
       } else if (userStores.state.registerOrg.status == false) {
         router.push("/logout");
       }

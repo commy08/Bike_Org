@@ -1,9 +1,9 @@
 <template>
-    <v-app dark>
+    <v-app>
         <v-container grid-list-md text-xs-center>
             <v-layout align-center justify-space-around row fill-height>
-                <v-flex xs6>
-                    <v-card  > 
+                <v-flex xs6 >
+                    <v-card dark> 
                         <v-container>
                             <v-layout row wrap>
                                 <v-flex xs4 >
@@ -19,7 +19,7 @@
                      </v-card>
                  </v-flex>
                  <v-flex xs6> 
-                      <v-card  > 
+                      <v-card dark> 
                         <v-container>
                             <v-layout row wrap>
                                 <v-flex xs4 >

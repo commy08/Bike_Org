@@ -43,7 +43,7 @@ export default {
       // console.log(userStores.state.access_token);
       if(userStores.state.access_token.status == 200){
           localStorage.access_token = userStores.state.access_token.access_token;
-          router.push('/SelectType')
+          router.push('/selecttype')
       }else{
         router.push('/') 
       }
@@ -69,7 +69,7 @@ export default {
   },
   async mounted () {
     await this.getTokenLine()
-    if(localStorage.access_token) router.push('/SelectType')
+    if(localStorage.access_token) router.push('/selecttype')
     else router.push('/')
     // await this.getUser()
   },

@@ -104,7 +104,7 @@ export default {
        if(this.user.type == 'r'){
            this.$router.push("/");
        }else if(this.user.type == 'o') {
-              this.$router.push("/profileorg");
+              this.$router.push("/");
        }
     },
 
