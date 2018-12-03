@@ -43,7 +43,7 @@ export default {
       // console.log(userStores.state.access_token);
       if(userStores.state.access_token.status == 200){
           localStorage.access_token = userStores.state.access_token.access_token;
-          router.push('/selecttype')
+          router.push('/')
       }else{
         router.push('/') 
       }
@@ -57,10 +57,10 @@ export default {
       // console.log(userStores.state.user.user);
       // console.log(userStores.state.user.status);
       if (userStores.state.user.status == 200) {
-        if(userStores.state.user.type == 'o'){
+        if(userStores.state.user.type == 'org'){
           router.push("/");
         }
-        if(userStores.state.user.type == 'r'){
+        if(userStores.state.user.type == 'user'){
            router.push("/");
          }
       } else if (userStores.state.user.status == 400) 
@@ -69,7 +69,7 @@ export default {
   },
   async mounted () {
     await this.getTokenLine()
-    if(localStorage.access_token) router.push('/selecttype')
+    if(localStorage.access_token) router.push('/')
     else router.push('/')
     // await this.getUser()
   },

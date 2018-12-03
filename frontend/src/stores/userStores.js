@@ -4,6 +4,8 @@ import axios from '@/axios';
 
 Vue.use(Vuex)
 
+const server_ip = 'http://192.168.1.101:8080/'; 
+
 const userStores = new Vuex.Store({
   state: {
       user : [],
@@ -12,6 +14,8 @@ const userStores = new Vuex.Store({
       porfileOrg : [],
       access_token : [],
       lineloginline : null,
+      rs_getAddress : [],
+      rs_addEvent : [], 
   },
   mutations: {
       // setPosts(state,posts) {
@@ -32,47 +36,66 @@ const userStores = new Vuex.Store({
       registerUser(state, data){
         state.registerUser = data
       },
-      porfileOrg(state, data){
-        state.porfileOrg = data
+      profileOrg(state, data){
+        state.profileOrg = data
+      },
+      getAddress(state, data){
+        state.rs_getAddress = data
+      },
+      postAddevent(state, data){
+        state.rs_addEvent = data
       }
   },
   actions: {
       async getLoginLine(context) {
-          let lineloginline = await axios.get("http://10.94.180.139:8080/login").then((r) => {
+          let lineloginline = await axios.get(server_ip + "login").then((r) => {
               return r.data
           })
           context.commit("getLoginLine", lineloginline)
       },
       async getTokenLine(context, options) {
-          let data = await axios.get("http://10.94.180.139:8080/callback?code=" + options.code + "&state=" + options.state).then((r) => {
+          let data = await axios.get(server_ip + "callback?code=" + options.code + "&state=" + options.state).then((r) => {
               return r.data
           })
           context.commit("getTokenLine", data)
       },
       async getUser(context, options) {
-          let data = await axios.post("http://10.94.180.139:8080/getUser",options,{headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}}).then((r) => {
+          let data = await axios.post(server_ip + "getUser",options,{headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}}).then((r) => {
               return r.data
           })
           context.commit("getUser", data)
       },
       async registerOrg(context, options) {
-        let data = await axios.post("http://10.94.180.139:8080/registerOrg",options,{headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}}).then((r) => {
+        let data = await axios.post(server_ip + "registerOrg",options,{headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}}).then((r) => {
             return r.data
         })
         context.commit("registerOrg", data)
       },
       async registerUser(context, options) {
-        let data = await axios.post("http://10.94.180.139:8080/registerUser ",options,{headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}}).then((r) => {
+        let data = await axios.post(server_ip + "registerUser",options,{headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}}).then((r) => {
             return r.data
         })
         context.commit("registerUser", data)
       },
-      async porfileOrg(context, options) {
-        let data = await axios.post("http://10.94.180.139:8080/api/event ",options,{headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}}).then((r) => {
+      async profileOrg(context, options) {
+        let data = await axios.get(server_ip + "api/event",options,{headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}}).then((r) => {
             return r.data
         })
-        context.commit("porfileOrg", data)
+        context.commit("profileOrg", data)
+      },
+      async getAddress(context) {
+        let data = await axios.get(server_ip + "api/address",{headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}}).then((r) => {
+            return r.data
+        })
+        context.commit("getAddress", data)
+      },
+      async postAddevent(context) {
+        let data = await axios.post(server_ip + "api/event",{headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}}).then((r) => {
+            return r.data
+        })
+        context.commit("postAddevent", data)
       },
   }
 })
-    export default userStores;
+
+export default userStores;

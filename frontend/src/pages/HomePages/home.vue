@@ -1,123 +1,68 @@
 <template>
   <v-app dark>
     <section>
-      <v-parallax :src="require('@/assets/img/background.jpg')" alt="background.jpg" height="600">
-          <!-- <v-layout column align-center justify-center class="black-text">
-              <img src="@/assets/logo.png" alt="logo" height="200">
-          </v-layout> -->
-      </v-parallax>
-    </section>
-
-    <section>
-      <v-layout column wrap align-center>
-        <v-flax xs12 class="my-5">
-          <div class="text-xs-center">
-            <h2 class="headline">รายการแแนะนำ</h2>
-          </div>
-        </v-flax>
-        <v-flax xs12>
-          <v-container grid-list-xl>
-            <v-layout row wrap align-center>
-              <v-flex xs12 md4>
-              <v-card class="elevation-0 transparent">
-                <v-card-text class="text-xs-center">
-                  <img src="http://www.up.ac.th/FileUpload/0fupcjxb.jpg" alt="Vuetify.js" height="150">
-                </v-card-text>
-                <v-card-title primary-title class="layout justify-center">
-                  <div class="headline">University of Phayao Game</div>
-                </v-card-title>
+      <v-parallax :src="require('@/assets/img/background.jpg')" alt="background.jpg" height="630">
+        <v-layout class="align-start justify-start row text-lg-right ma-3">
+          <v-flex xs2>
+            <v-card dark color="accent" class="circle50 pr-3 mx-2 elevation-20">
+              <router-link to="/registerOrg" tag="div">
                 <v-card-text>
-                  เป็นปีแรกที่ มหาวิทยาลัยพะเยาเข้าแข่งขันกีฬาจักรยาน โดยเป็นไปตามคาดได้รับเหรียญทองจากจักรยานเสือภูเขา 1 เหรียญ 
-                  และจากจักรยานเสือหมอบ 2 เหรียญ
+                  <img :src="require('@/assets/img/businessman.png')" alt="businessman" height="35">
+                  <span class="title ml-3">ลงทะเบียน</span>
+                  <br>
+                  <span class="text">ผู้จัดกิจกรรม</span>
                 </v-card-text>
-              </v-card>
-              </v-flex>
-
-              <v-flex xs12 md4>
-              <v-card class="elevation-0 transparent">
-                <v-card-text class="text-xs-center">
-                  <img src="http://www.up.ac.th/FileUpload/19092991_1439724842740262_869443587918005891_o.jpg" alt="Vuetify.js" height="150">
-                </v-card-text>
-                <v-card-title primary-title class="layout justify-center">
-                  <div class="headline">University of Phayao Game</div>
-                </v-card-title>
-                <v-card-text>
-                  ปิดฉากอย่างเป็นทางการแล้วสำหรับ กีฬาจักรยาน มหาวิทยาลัยพะเยาได้รับเหรียญทองจากจักรยานเสือภูเขา 1 เหรียญ และจากจักรยานเสือหมอบ 2 เหรียญ
-                </v-card-text>
-              </v-card>
-              </v-flex>
-
-              <v-flex xs12 md4>
-              <v-card class="elevation-0 transparent">
-                <v-card-text class="text-xs-center">
-                  <img src="https://siamrath.co.th/files/styles/750/public/img/20170604/1c90293523840096fcb46ebb93da98ddddd1cc96dd531d5174f151a7819f9c54.JPG?itok=YaeBX6GC" alt="Vuetify.js" height="150">
-                </v-card-text>
-                <v-card-title primary-title class="layout justify-center">
-                  <div class="headline">Sport Tourism Bike 4 All</div>
-                </v-card-title>
-                <v-card-text>
-                  ตามที่สมาคมกีฬาจักรยานแห่งประเทศไทย ในพระบรมราชูปถัมภ์ ร่วมกับ จังหวัดนครนายก 
-                  จัดการแข่งขันจักรยานปั่นเพื่อชีวิต “Sport Tourism Bike 4 All”
-                </v-card-text>
-              </v-card>
-              </v-flex>
-
-            </v-layout>
-          </v-container>
-        </v-flax>
-      </v-layout>
-    </section>
-
-    <section>
-      <v-parallax src="https://www.filmhousecinema.com/sites/filmhousecinema.com/files/shows/2017/Mountain-3.jpg" alt="background">
-          <v-flex>
-             <v-layout column wrap align-center >
-            <v-flax xs12 class="my-5">
-              <div class="text-xs-center">
-                <h2 class="headline">เกี่ยวกับ BIKE - ORGANIZE</h2>
-              </div>
-            </v-flax>
-          </v-layout>
-            <v-flax xs12>
-              <v-container grid-list-xl>
-                <v-layout row wrap align-center md6>
-                  <v-flex xs12 md6>
-                    <div class="text-xs-center elevation-0 transparent" >
-                      <v-avatar size="125px">
-                        <img class="img-circle elevation-24 mb-5" src="https://scontent.fbkk1-5.fna.fbcdn.net/v/t1.0-9/12832290_538790829623686_8041543728812996744_n.jpg?_nc_cat=102&_nc_eui2=AeFQNFRf4SUSsUJmSEgCSaHPKHpqC51kOqITiCrSAeYjGqLs98q62A0savGJ9oL5ug8t95lRQ460T3lsUyIA-GBndAmP5Xdp9xIofRK33AiFCg&_nc_ht=scontent.fbkk1-5.fna&oh=3449f0357b0dc38aff5d8fa1e09e3e8a&oe=5C79F292">
-                      </v-avatar>
-                      <div class="headline" style="font-weight:bold">Teerapat  <span>Injai</span></div>
-                        <!-- <div class="subheading text-xs-center pt-2 pb-5">Lorem ipsum dolor sit amet</div> -->
-                        <!-- <v-layout justify-space-between>
-                          <a href="javascript:;" class="body-2">Home</a>
-                          <a href="javascript:;" class="body-2">About</a>
-                          <a href="javascript:;" class="body-2">Github</a>
-                          <a href="javascript:;" class="body-2">Other</a>
-                        </v-layout> -->
-                    </div>
-                  </v-flex>
-
-                  <v-flex xs12 md6>
-                    <div class="text-xs-center elevation-0 transparent" >
-                      <v-avatar size="125px">
-                        <img class="img-circle elevation-24 mb-5" src="https://scontent.fbkk1-5.fna.fbcdn.net/v/t1.0-9/38412095_2175362869342421_8893393646578040832_n.jpg?_nc_cat=111&_nc_eui2=AeHmMGpnzlNU47nr2bOyVotK_ppDMSATJnNj7VWj4DdT_mvK4O9OUxCgLlZ12KIb6AUQa9RZ9j_nU93M0zkwOpd9XDJg14hMyrRHQfZcawp5WQ&_nc_ht=scontent.fbkk1-5.fna&oh=8afc0e755f26be639dfa526f72280f1c&oe=5C84DAAE">
-                      </v-avatar>
-                      <div class="headline"  style="font-weight:bold">Noppawong  <span>Surintham</span></div>
-                        <!-- <div class="subheading text-xs-center pt-2 pb-5">Lorem ipsum dolor sit amet</div> -->
-                        <!-- <v-layout justify-space-between>
-                          <a href="javascript:;" class="body-2">Home</a>
-                          <a href="javascript:;" class="body-2">About</a>
-                          <a href="javascript:;" class="body-2">Github</a>
-                          <a href="javascript:;" class="body-2">Other</a>
-                        </v-layout> -->
-                    </div>
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-flax>
+              </router-link>
+            </v-card>
           </v-flex>
+          &nbsp;
+          <v-flex xs2>
+            <v-card dark color="accent" class="circle50 pr-3 mx-2 elevation-20">
+              <router-link to="/registerUser" tag="div">
+                <v-card-text>
+                  <img :src="require('@/assets/img/cycling.png')" alt="cycling" height="35">
+                  <span class="title ml-4">ลงทะเบียน</span>
+                  <br>
+                  <span class="text">นักปั่น</span>
+                </v-card-text>
+              </router-link>
+            </v-card>
+          </v-flex>
+        </v-layout>
+        <v-layout class="align-end justify-start row text-lg-right pb-5 ma-4">
+          <v-flex xs2>
+            <v-card dark color="accent" class="circle50 elevation-20">
+              <router-link to="/event" tag="div">
+                <v-card-text>
+                  <img :src="require('@/assets/img/mountain-bike.png')" alt="mountain-bike" height="35">
+                  <span class="title ml-3">รายการแข่งขัน</span>
+                </v-card-text>
+              </router-link>
+            </v-card>
+          </v-flex>
+        </v-layout>
       </v-parallax>
     </section>
-
   </v-app>
 </template>
+
+<script>
+  export default {
+    data: () => ({
+      
+    }),
+    methods: {
+
+    },
+    props: {
+      source: String
+    }
+  }
+</script>
+
+<style>
+  .title{
+  /* font-family: 'Niramit', serif !important; */
+  font-family: 'Kanit', sans-serif !important;
+}
+</style>

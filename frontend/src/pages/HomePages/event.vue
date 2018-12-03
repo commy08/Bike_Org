@@ -1,20 +1,10 @@
 <template>
     <v-app dark>
         <section>
-            <v-carousel>
-                <v-carousel-item
-                    v-for="(item,i) in items"
-                    :key="i"
-                    :src="item.src">
-                </v-carousel-item>
-            </v-carousel>
-            <span></span>
-            <span></span>
-            <span></span>
             <v-toolbar class="amber title">
-                <v-layout justify-space-around>
-                    <router-link to="/event">จักรยานเสือภูเขา</router-link>
-                    <router-link to="/event/road_bike">จักรยานทางเรียบ</router-link>
+                <v-layout light class="justify-space-around">
+                    <router-link to="/event" tag="div">จักรยานเสือภูเขา</router-link>
+                    <router-link to="/event/road_bike" tag="div">จักรยานทางเรียบ</router-link>
                 </v-layout>
             </v-toolbar>
             <router-view></router-view>

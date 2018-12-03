@@ -9,17 +9,16 @@ import Home from '@/pages/HomePages/home'
 import ProfileOrg from '@/pages/HomePages/user/profileOrg'
 import Addevent from '@/pages/HomePages/user/addevent'
 import Amound from '@/pages/HomePages/user/amound'
+import ckevent from '@/pages/HomePages/user/ckevent'
 
 import Callback from '@/pages/layout/callback'
 
 import ProfileUser from '@/pages/HomePages/user/profileUser'
-// import RegiProfileUser from '@/pages/HomePages/user/regiProfileUser'
 
 import Events from '@/pages/HomePages/event'
-import MTB_Bike from '@/pages/HomePages/mtbBike'
-import road_bike from '@/pages/HomePages/roadBike'
+import MTB_Bike from '@/pages/HomePages/user/mtbBike'
+import road_bike from '@/pages/HomePages/user/roadBike'
 
-import selecttype from '@/pages/HomePages/selectType'
 import RegisterUser from '@/pages/HomePages/user/registerUser'
 import RegisterOrg from '@/pages/HomePages/user/registerOrg'
 
@@ -55,18 +54,13 @@ const routes = [
         footer: Footer
     },
     children:[
-      {path : '/', name : 'event',component : event},
+      {path : '', name : 'ckevent', components: {
+        start: ckevent,
+    }},
+      {path : '/profileorg/active', name : 'ckevent',component : ckevent},
       {path : '/profileOrg/addevent', name : 'addevent',component : Addevent},
       {path : '/profileOrg/amound', name : 'amound',component : Amound}
     ],
-  },
-  { 
-      path: '/logout',
-      name: 'logout',
-      beforeEnter: (to, from, next) => {
-          localStorage.clear()
-          next('/')
-      }
   },
   {
     path: '/callback',
@@ -82,20 +76,11 @@ const routes = [
         header: Header,
         default: ProfileUser,
         footer: Footer
-    },
+    }
     // children:[
     //   { path : '', name : 'RegiProfileUser',component : RegiProfileUser },
     //   { path : '/profileUser/profileOrg1', name : 'profileOrg1',component : profileOrg1 }
     // ],
-  },
-  {
-    path: '/selecttype',
-    name:'selecttype',
-    components: {
-        header: Header,
-        default: selecttype,
-        footer: Footer
-    }
   },
   {
     path: '/RegisterUser',
@@ -113,6 +98,14 @@ const routes = [
         header: Header,
         default: RegisterOrg,
         footer: Footer
+    }
+  },
+  { 
+    path: '/logout',
+    name: 'logout',
+    beforeEnter: (to, from, next) => {
+        localStorage.clear()
+        next('/')
     }
   },
 ]

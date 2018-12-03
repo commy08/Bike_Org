@@ -1,18 +1,10 @@
 <template>
     <v-app>
-        <section>
-            <v-container>
+        <v-container>
             <v-layout align-start justify-space-around row fill-height>
                 <v-flex v-for="i in 3" :key="`4${i}`" xs3>
-                    <v-card>
-                        <img src="@/assets/img/lo03.jpg" contain height="197">
-                        <!-- <v-img
-                        src="@/assets/img/1460953620_20077.jpg"
-                        height="200px"
-                        aspect-ratio="2"
-                        >
-                        </v-img> -->
-
+                    <v-card class="circle50">
+                        <img src="@/assets/img/1460953620_20077.jpg" height="194.7">
                         <v-card-title primary-title>
                         <div>
                             <div class="headline">Top western road trips</div>
@@ -39,7 +31,6 @@
                 </v-flex>
             </v-layout>
         </v-container>
-        </section>
     </v-app>
 </template>
 
