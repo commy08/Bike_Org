@@ -9,27 +9,28 @@
               <!-- <v-form ref="form"  v-model="org" lazy-validation> -->
                 <v-text-field
                   v-model="form.OrgName"
-                  :rules="rulse.name"
+                  :rulse="rulse.name"
                   label="ชื่อร้านผู้ประกอบการ"
                   required
+                  outline
                 ></v-text-field>
-                <v-text-field v-model="form.firstname" :rules="rulse.name" label="ชื่อ" required></v-text-field>
-                <v-text-field v-model="form.lastname" :rules="rulse.name" label="นามสกุล" required></v-text-field>
-                <v-flex xs6>
+                <v-text-field v-model="form.firstname" :rulse="rulse.name" label="ชื่อ" outline required></v-text-field>
+                <v-text-field v-model="form.lastname" :rulse="rulse.name" label="นามสกุล" outline required></v-text-field>
+                
                   <v-text-field
                     v-model="form.tel"
-                    :rules="rulse.rulesTel"
+                    :rulse="rulse.rulseTel"
                     :counter="10"
                     :maxlength="10"
                     label="เบอร์มือถือ"
                     mask="phone"
                     required
+                    outline
                   ></v-text-field>
-                </v-flex>
-                <v-text-field v-model="form.address" :rules="rulse.name" label="ที่อยู่" required></v-text-field>
+                <v-text-field v-model="form.address" :rulse="rulse.name" label="ที่อยู่" outline required></v-text-field>
                 <v-flex>
-                  <v-select :items="address.provinces" label="จังหวัด" outline></v-select>
-                  <v-select :items="address.amphurs" label="อำเภอ" outline></v-select>
+                  <v-select :items="address.provinces" v-model="form.provinces" label="จังหวัด" outline></v-select>
+                  <v-select :items="address.amphurs" v-model="form.amphurs" label="อำเภอ" outline></v-select>
                 </v-flex>
 
                 <v-flex xs12 lg6>
@@ -63,7 +64,7 @@
                 <v-flex xs6>
                   <v-text-field
                     v-model="form.tradeNum"
-                    :rules="rulse.name"
+                    :rulse="rulse.name"
                     :counter="13"
                     :maxlength="13"
                     label="เลขใบทะเบียนพาณิชย์"
@@ -106,7 +107,7 @@
 
                 <v-checkbox
                   v-model="form.checkbox"
-                  :rules="[v => !!v || 'You must agree to continue!']"
+                  :rulse="[v => !!v || 'You must agree to continue!']"
                   label="ยืนยันการสมัครสมาชิก"
                   required
                 ></v-checkbox>
@@ -117,7 +118,7 @@
                   :disabled="!formIsValid"
                   type="submit"
                 >ยืนยันการสมัคร</v-btn>
-                <v-btn @click="clear">ยกเลิก</v-btn>
+                <v-btn @click="clearForm">ยกเลิก</v-btn>
               <!-- </v-form> -->
             </v-card-text>
           </v-card>
@@ -144,10 +145,10 @@ export default {
       lastname: null,
       tel: null,
       address: null,
-      amphur_id: null,
-      province_id: null,
+      amphurs: null,
+      provinces: null,
       sex: null,
-      terdeNum: null,
+      tradeNum: null,
       picID: "",
       picORG: "",
       date: "",
@@ -165,10 +166,10 @@ export default {
     imageName: "",
     imageUrl: "",
     imageFile: "",
-
+    
     rulse: {
       name: [v => !!v || "กรุณากรอกข้อมูล"],
-      rulesTel: [
+      rulseTel: [
         v => !!v || "กรุณากรอกเบอร์โทรศัพท์",
         v => (v && v.length <= 10) || "กรุณาตรวจกรอกข้อมูลให้ถูกต้อง"
       ]
@@ -189,7 +190,7 @@ export default {
         access_token: localStorage.access_token,
         form: this.form
       };
-      console.log(optionts)
+      // console.log(optionts)
       await userStores.dispatch("registerOrg", optionts);
       if (userStores.state.registerOrg.status) {
         alert("สมัครสมาชิกเสร็จสิ้น");
@@ -214,7 +215,8 @@ export default {
       });
       this.address.all = userStores.state.rs_getAddress;
     },
-    clear() {
+    clearForm() {
+      this.form = Object.assign({}, this.defaultForm);
       this.$refs.form.reset();
     },
     pickFile() {

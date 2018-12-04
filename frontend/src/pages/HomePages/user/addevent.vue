@@ -37,9 +37,16 @@
               <v-select :items="address.provinces" label="จังหวัด" outline></v-select>
               <v-select :items="address.amphurs" label="อำเภอ" outline></v-select>
             </v-flex>
+
+            <v-flex>
+              <calendar> :readonly="true" format="YYYY-MM-DD" </calendar>
+               <calendar> :readonly="true" format="YYYY-MM-DD" </calendar>
+                <calendar> :readonly="true" format="YYYY-MM-DD" </calendar>
+            </v-flex>
+
             <v-flex xs6>
             <v-select
-              v-model="form.type"
+              v-model="form.typew"
               :items="type"
               label="ประเภท"
               outline
@@ -58,7 +65,7 @@
               :disabled="!formIsValid"
               type="submit"
             >ยืนยันการสมัคร</v-btn>
-            <!-- <v-btn @click="clear">ยกเลิก</v-btn> -->
+            <v-btn @click="clearForm">ยกเลิก</v-btn>
           </v-flex>
         <!-- </v-form> -->
       </v-card-text>
@@ -69,8 +76,11 @@
 <script>
 import userStores from "@/stores/userStores";
 import router from "@/router";
+import calendar from "./calendar.vue"
 
 export default {
+  components: { calendar },
+
   data: () => ({
     address:{
       amphurs: [],
@@ -81,8 +91,8 @@ export default {
       name: null,
       dateil: null,
       location: null,
-      amphur_id: null,
-      province_id: null,
+      amphur: null,
+      province: null,
       dateClose: null,
       dateDeadline: null,
       dateRace: null,
@@ -111,7 +121,7 @@ export default {
         access_token: localStorage.access_token,
         form: this.form
       };
-      console.log(optionts)
+      // console.log(optionts)
       await userStores.dispatch("postAddevent", optionts);
       alert(userStores.state.rs_addEvent.msg)
     },
@@ -133,7 +143,7 @@ export default {
       });
       this.address.all = userStores.state.rs_getAddress
     },
-    resetForm() {
+    clearForm() {
       this.form = Object.assign({}, this.defaultForm);
       this.$refs.form.reset();
     },

@@ -38,7 +38,7 @@ export default {
         code : this.$route.query.code,
         state : this.$route.query.state
       }
-      
+      // console.log("optionts",optionts);
       await userStores.dispatch('getTokenLine',optionts)
       // console.log(userStores.state.access_token);
       if(userStores.state.access_token.status == 200){

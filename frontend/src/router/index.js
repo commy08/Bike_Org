@@ -22,98 +22,125 @@ import road_bike from '@/pages/HomePages/user/roadBike'
 import RegisterUser from '@/pages/HomePages/user/registerUser'
 import RegisterOrg from '@/pages/HomePages/user/registerOrg'
 
-const routes = [
-  { 
+import Calendar from '@/pages/HomePages/user/calendar'
+
+const routes = [{
     path: '/',
-    name:'home',
+    name: 'home',
     components: {
-        header: Header,
-        default: Home,
-        footer: Footer
+      header: Header,
+      default: Home,
+      footer: Footer
     }
   },
   {
     path: '/event',
-    name:'event',
+    name: 'event',
     components: {
-        header: Header,
-        default: Events,
-        footer: Footer
+      header: Header,
+      default: Events,
+      footer: Footer
     },
-    children:[
-      {path : '', name : 'MTBBike',component : MTB_Bike},
-      {path : '/event/road_bike', name : 'RoadBike',component : road_bike}
+    children: [{
+        path: '',
+        name: 'MTBBike',
+        component: MTB_Bike
+      },
+      {
+        path: '/event/road_bike',
+        name: 'RoadBike',
+        component: road_bike
+      }
     ],
   },
   {
     path: '/profileOrg',
-    name:'profileOrg',
+    name: 'profileOrg',
     components: {
-        header: Header,
-        default: ProfileOrg,
-        footer: Footer
+      header: Header,
+      default: ProfileOrg,
+      footer: Footer
     },
-    children:[
-      {path : '', name : 'ckevent', components: {
-        start: ckevent,
-    }},
-      {path : '/profileorg/active', name : 'ckevent',component : ckevent},
-      {path : '/profileOrg/addevent', name : 'addevent',component : Addevent},
-      {path : '/profileOrg/amound', name : 'amound',component : Amound}
+    children: [{
+        path: '',
+        name: 'ckevent',
+        components: {
+          start: ckevent,
+        }
+      },
+      {
+        path: '/profileorg/active',
+        name: 'ckevent',
+        component: ckevent
+      },
+      {
+        path: '/profileOrg/addevent',
+        name: 'addevent',
+        component: Addevent
+      },
+      {
+        path: '/profileOrg/amound',
+        name: 'amound',
+        component: Amound
+      },
+      {
+        path: '/profileOrg/calendar',
+        name: 'calendar',
+        component: Calendar
+      }
     ],
   },
   {
     path: '/callback',
-    name:'callback',
+    name: 'callback',
     components: {
-        default: Callback,
+      default: Callback,
     }
   },
   {
     path: '/profileuser',
-    name:'profileuser',
+    name: 'profileuser',
     components: {
-        header: Header,
-        default: ProfileUser,
-        footer: Footer
+      header: Header,
+      default: ProfileUser,
+      footer: Footer
     }
     // children:[
-    //   { path : '', name : 'RegiProfileUser',component : RegiProfileUser },
-    //   { path : '/profileUser/profileOrg1', name : 'profileOrg1',component : profileOrg1 }
+    //   { path : '', name : '',component :  },
+    //   { path : '/profileUser/', name : '',component :  }
     // ],
   },
   {
     path: '/RegisterUser',
-    name:'registerUser',
+    name: 'registerUser',
     components: {
-        header: Header,
-        default: RegisterUser,
-        footer: Footer
+      header: Header,
+      default: RegisterUser,
+      footer: Footer
     }
   },
   {
     path: '/RegisterOrg',
-    name:'registerOrg',
+    name: 'registerOrg',
     components: {
-        header: Header,
-        default: RegisterOrg,
-        footer: Footer
+      header: Header,
+      default: RegisterOrg,
+      footer: Footer
     }
   },
-  { 
+  {
     path: '/logout',
     name: 'logout',
     beforeEnter: (to, from, next) => {
-        localStorage.clear()
-        next('/')
+      localStorage.clear()
+      next('/')
     }
   },
 ]
 
 const router = new VueRouter({
-  mode :'history',
+  mode: 'history',
   routes // short for `routes: routes`
 })
 
 export default router
-

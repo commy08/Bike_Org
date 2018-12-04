@@ -1,56 +1,60 @@
 <template>
-    <v-content>
-        <v-toolbar>
-            <v-toolbar-title  class="font-weight-black font-italic headline">
-                <router-link to="/" tag="div"><span class="title ml-3 mr-5">BIKE&nbsp;<span class="text">ORGANIZE</span></span></router-link>
-            </v-toolbar-title>
-            <v-text-field 
-                flat 
-                solo-inverted 
-                hide-details 
-                prepend-icon="search"
-                label="ค้นหารายการแข่งขัน..."
-                value="ค้นหา">
-            </v-text-field>
-            <v-spacer></v-spacer>
-        
-            <a v-if="user.id == null" :href="loginline">
-                <v-btn round class="light-green accent-4">เข้าสู่ระบบผ่าน Line</v-btn>                   
-            </a>
-            
-            <v-menu v-else-if="user.type == 'user'"  offset-y> 
-                <v-btn dark color="light-green accent-4" slot="activator">{{ user.firstname }}</v-btn>
-                <v-list>
-                    <v-list-tile
-                    v-for="(item, index) in itemsUser"
-                    :key="index"
-                    >
-                    <v-list-tile-title ><a class="btn" color="light-green accent-4" :href="item.link">{{ item.title }}</a></v-list-tile-title>
-                    </v-list-tile>
-                </v-list>
-            </v-menu>
+  <v-content>
+    <v-toolbar>
+      <v-toolbar-title class="font-weight-black font-italic headline">
+        <router-link to="/" tag="div">
+          <span class="title ml-3 mr-5">BIKE&nbsp;
+            <span class="text">ORGANIZE</span>
+          </span>
+        </router-link>
+      </v-toolbar-title>
+      <v-text-field
+        flat
+        solo-inverted
+        hide-details
+        prepend-icon="search"
+        label="ค้นหารายการแข่งขัน..."
+        value="ค้นหา"
+      ></v-text-field>
+      <v-spacer></v-spacer>
 
-            <v-menu v-else-if ="user.type == 'org'"  offset-y>
-                <v-btn dark color="light-green accent-4" slot="activator">{{ user.firstname }}</v-btn>
-                <v-list>
-                    <v-list-tile
-                    v-for="(item, index) in itemsOrg"
-                    :key="index"
-                    >
-                    <v-list-tile-title ><a class="btn" color="light-green accent-4" :href="item.link">{{ item.title }}</a></v-list-tile-title>
-                    </v-list-tile>
-                </v-list>
-            </v-menu>
+      <a v-if="user.id == null" :href="loginline">
+        <v-btn round class="light-green accent-4">เข้าสู่ระบบผ่าน Line</v-btn>
+      </a>
 
-            <v-menu v-else offset-y>
-                <v-btn dark color="light-green accent-4" slot="activator">{{ user.firstname }}</v-btn>
-                <v-list>
-                    <v-list-tile  >
-                    <v-list-tile-title ><a class="btn" color="light-green accent-4"  @click="logout()" >ออกจากระบบ</a></v-list-tile-title>
-                    </v-list-tile>
-                </v-list>
-            </v-menu>
-      </v-toolbar>
+      <v-menu v-else-if="user.type == 'user'" offset-y>
+        <v-btn color="light-green accent-4" slot="activator">{{ user.firstname }}</v-btn>
+        <v-list>
+          <v-list-tile v-for="(item, index) in itemsUser" :key="index">
+            <v-list-tile-title>
+              <a class="btn" color="light-green accent-4" :href="item.link">{{ item.title }}</a>
+            </v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
+
+      <v-menu v-else-if="user.type == 'org'" offset-y>
+        <v-btn dark color="light-green accent-4" slot="activator">{{ user.firstname }}</v-btn>
+        <v-list>
+          <v-list-tile v-for="(item, index) in itemsOrg" :key="index">
+            <v-list-tile-title>
+              <a class="btn" color="light-green accent-4" :href="item.link">{{ item.title }}</a>
+            </v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
+
+      <v-menu v-else offset-y>
+        <v-btn dark color="light-green accent-4" slot="activator">{{ user.firstname }}</v-btn>
+        <v-list>
+          <v-list-tile>
+            <v-list-tile-title>
+              <a class="btn" color="light-green accent-4" @click="logout()">ออกจากระบบ</a>
+            </v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
+    </v-toolbar>
   </v-content>
 </template>
 

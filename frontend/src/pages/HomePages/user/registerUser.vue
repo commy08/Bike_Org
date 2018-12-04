@@ -2,220 +2,129 @@
   <v-app dark>
     <v-container grid-list-md text-xs-center>
       <v-layout row wrap justify-center>
-        <!-- <v-flex xs8>
+        <v-flex xs8>
           <v-card>
             <v-card-title class="title blue-grey lighten-1">กรุณากรอกข้อมูลส่วนตัว</v-card-title>
             <v-card-text>
-              <v-form ref="form" lazy-validation>
-                <v-text-field v-model="form.firstname" :rules="rules.name" label="ชื่อ" required></v-text-field>
-                <v-text-field v-model="form.lastname" :rules="rules.name" label="นามสกุล" required></v-text-field>
-                <v-flex xs6>
-                  <v-text-field
-                    v-model="form.tel"
-                    :rules="rules.rulesTel"
-                    :counter="10"
-                    label="เบอร์มือถือ"
-                    mask="phone"
-                    :maxlength="10"
-                    required
-                  ></v-text-field>
-                </v-flex>
-                <v-flex xs6>
-                  <v-text-field v-model="form.address" :rules="rules.name" label="ที่อยู่" required></v-text-field>
-                </v-flex>
-                <v-flex>
-                  <v-select :items="address.provinces" label="จังหวัด" outline></v-select>
-                  <v-select :items="address.amphurs" label="อำเภอ" outline></v-select>
-                </v-flex>
+              <v-text-field
+                v-model="form.firstname"
+                :rulse="rulse.name"
+                label="ชื่อ"
+                required
+                outline
+              ></v-text-field>
+              <v-text-field
+                v-model="form.lastname"
+                :rulse="rulse.name"
+                label="นามสกุล"
+                required
+                outline
+              ></v-text-field>
+              <v-text-field
+                v-model="form.tel"
+                :rulse="rulse.rulseTel"
+                :counter="10"
+                label="เบอร์มือถือ"
+                mask="phone"
+                :maxlength="10"
+                required
+                outline
+              ></v-text-field>
+              <v-flex xs6>
+                <v-text-field
+                  v-model="form.address"
+                  :rulse="rulse.name"
+                  label="ที่อยู่"
+                  required
+                  outline
+                ></v-text-field>
+              </v-flex>
+              <v-flex>
+                <v-select
+                  :items="address.provinces"
+                  v-model="form.provinces"
+                  label="จังหวัด"
+                  outline
+                ></v-select>
+                <v-select :items="address.amphurs" v-model="form.amphurs" label="อำเภอ" outline></v-select>
+              </v-flex>
 
-                <v-flex xs12 lg6>
-                  <v-menu
-                    ref="menu"
-                    :close-on-content-click="false"
-                    v-model="menu"
-                    :nudge-right="40"
-                    lazy
-                    transition="scale-transition"
-                    offset-y
-                    full-width
-                    min-width="290px"
-                  >
-                    <v-text-field
-                      slot="activator"
-                      v-model="date"
-                      label="วันเกิด"
-                      :rules="rules.name"
-                      prepend-icon="event"
-                      readonly
-                    ></v-text-field>
-
-                    <v-date-picker
-                      ref="picker"
-                      v-model="date"
-                      :max="new Date().toISOString().substr(0, 10)"
-                      min="1950-01-01"
-                      @change="save"
-                    ></v-date-picker>
-                  </v-menu>
-                </v-flex>
-
-                <v-flex xs3>
-                        <v-select
-                        v-model="form.sex"
-                        :items="items"
-                        :rules="[v => !!v || 'กรุณาเลือกเพศ']"
-                        label="เพศ"
-                        required
-                        ></v-select>
-                </v-flex>
-                <v-flex
-                  xs7
-                  class="text-xs-center text-sm-center text-md-center text-lg-center"
-                  v-model="picID"
+              <v-flex xs12 lg6>
+                <v-menu
+                  ref="menu"
+                  :close-on-content-click="false"
+                  v-model="menu"
+                  :nudge-right="40"
+                  lazy
+                  transition="scale-transition"
+                  offset-y
+                  full-width
+                  min-width="290px"
                 >
-                  <img :src="imageUrl" height="150" v-if="imageUrl">
                   <v-text-field
-                    label="อัพโหลด : รูปบัตรประชาชน"
-                    @click="pickFile"
-                    v-model="imageName"
-                    prepend-icon="attach_file"
+                    slot="activator"
+                    v-model="form.date"
+                    label="วันเกิด"
+                    :rulse="rulse.name"
+                    prepend-icon="event"
+                    readonly
                   ></v-text-field>
-                  <input
-                    type="file"
-                    style="display: none"
-                    ref="image"
-                    accept="image/*"
-                    @change="onFilePicked"
-                  >
-                </v-flex>
 
-                <v-checkbox
-                  v-model="form.checkbox"
-                  :rules="[v => !!v || 'กรุณาคลิกยินยอมการสมัครสมาชิก']"
-                  label="ยืนยันการสมัครสมาชิก"
+                  <v-date-picker
+                    ref="picker"
+                    v-model="form.date"
+                    :max="new Date().toISOString().substr(0, 10)"
+                    min="1950-01-01"
+                    locale="th"
+                    @change="save"
+                  ></v-date-picker>
+                </v-menu>
+              </v-flex>
+
+              <v-flex xs3>
+                <v-select
+                  v-model="form.sex"
+                  :items="items"
+                  :rulse="[v => !! v || 'กรุณาเลือกเพศ']"
+                  label="เพศ"
                   required
-                ></v-checkbox>
+                ></v-select>
+              </v-flex>
+              <v-flex
+                xs7
+                class="text-xs-center text-sm-center text-md-center text-lg-center"
+                v-model="form.picID"
+              >
+                <img :src="imageUrl" height="150" v-if="imageUrl">
+                <v-text-field
+                  label="อัพโหลด : รูปบัตรประชาชน"
+                  @click="pickFile"
+                  v-model="imageName"
+                  prepend-icon="attach_file"
+                ></v-text-field>
+                <input
+                  type="file"
+                  style="display: none"
+                  ref="image"
+                  accept="image/*"
+                  @change="onFilePicked"
+                >
+              </v-flex>
 
-                <v-btn color="blue darken-3" @click="Submit();">ยืนยันการสมัคร</v-btn>
-                <v-btn @click="clear">ยกเลิก</v-btn>
-              </v-form>
-            </v-card-text>
-          </v-card>
-        </v-flex> -->
+              <v-checkbox
+                v-model="form.checkbox"
+                :rulse="[v => !!v || 'You must agree to continue!']"
+                label="ยืนยันการสมัครสมาชิก"
+                required
+              ></v-checkbox>
 
-
-        <v-flex xs8>
-          <v-card>
-            <v-card-title class="title blue-grey lighten-1">กรุณากรอกข้อมูล</v-card-title>
-            <v-card-text>
-              <v-form ref="form" lazy-validation>
-                <v-text-field v-model="form.firstname" :rules="rules.name" label="ชื่อ" required></v-text-field>
-                <v-text-field v-model="form.lastname" :rules="rules.name" label="นามสกุล" required></v-text-field>
-                <v-flex xs6>
-                  <v-text-field
-                    v-model="form.tel"
-                    :rules="rules.rulesTel"
-                    :counter="10"
-                    label="เบอร์มือถือ"
-                    mask="phone"
-                    :maxlength="10"
-                    required
-                  ></v-text-field>
-                </v-flex>
-                <v-text-field v-model="form.address" :rules="rulse.name" label="ที่อยู่" required></v-text-field>
-                <v-flex>
-                  <v-select :items="address.provinces" label="จังหวัด" outline></v-select>
-                  <v-select :items="address.amphurs" label="อำเภอ" outline></v-select>
-                </v-flex>
-
-                <v-flex xs12 lg6>
-                  <v-menu
-                    ref="menu"
-                    :close-on-content-click="false"
-                    v-model="menu"
-                    :nudge-right="40"
-                    lazy
-                    transition="scale-transition"
-                    offset-y
-                    full-width
-                    min-width="290px"
-                  >
-                    <v-text-field
-                      slot="activator"
-                      v-model="date"
-                      label="วันเกิด"
-                      :rules="rules.name"
-                      prepend-icon="event"
-                      readonly
-                    ></v-text-field>
-                    <v-date-picker
-                      ref="picker"
-                      v-model="date"
-                      :max="new Date().toISOString().substr(0, 10)"
-                      min="1950-01-01"
-                      @change="save"
-                    ></v-date-picker>
-                  </v-menu>
-                </v-flex>
-                <v-flex xs6>
-                  <v-text-field
-                    v-model="form.tradeNum"
-                    :rules="rulse.name"
-                    :counter="13"
-                    :maxlength="13"
-                    label="เลขใบทะเบียนพาณิชย์"
-                    required
-                  ></v-text-field>
-                </v-flex>
-
-                <v-flex xs9 class="text-xs-center text-sm-center text-md-center text-lg-center">
-                  <img :src="imageUrl" height="150" v-if="imageUrl">
-                  <v-text-field
-                    label="อัพโหลด : รูปบัตรประชาชน"
-                    @click="pickFile"
-                    v-model="imageName"
-                    prepend-icon="attach_file"
-                  ></v-text-field>
-                  <input
-                    type="file"
-                    style="display: none"
-                    ref="image"
-                    accept="image/*"
-                    @change="onFilePicked"
-                  >
-                </v-flex>
-                <v-flex xs9 class="text-xs-center text-sm-center text-md-center text-lg-center">
-                  <img :src="imageUrlOrg" height="150" v-if="imageUrlOrg">
-                  <v-text-field
-                    label="อัพโหลด : รูปใบทะเบียนพาณิชย์"
-                    @click="pickFileOrg"
-                    v-model="imageNameOrg"
-                    prepend-icon="attach_file"
-                  ></v-text-field>
-                  <input
-                    type="file"
-                    style="display: none"
-                    ref="imageOrg"
-                    accept="imageOrg/*"
-                    @change="onFilePickedOrg"
-                  >
-                </v-flex>
-
-                <v-checkbox
-                  v-model="form.checkbox"
-                  :rules="[v => !!v || 'You must agree to continue!']"
-                  label="ยืนยันการสมัครสมาชิก"
-                  required
-                ></v-checkbox>
-
-                <v-btn
-                  color="blue darken-3"
-                  @click="addUser();"
-                  :disabled="!formIsValid"
-                  type="submit"
-                >ยืนยันการสมัคร</v-btn>
-                <v-btn @click="clear">ยกเลิก</v-btn>
-              </v-form>
+              <v-btn
+                color="blue darken-3"
+                @click="addUser();"
+                :disabled="!formIsValid"
+                type="submit"
+              >ยืนยันการสมัคร</v-btn>
+              <v-btn @click="clearForm">ยกเลิก</v-btn>
             </v-card-text>
           </v-card>
         </v-flex>
@@ -241,13 +150,12 @@ export default {
       lastname: null,
       tel: null,
       address: null,
-      amphur_id: null,
-      province_id: null,
+      amphurs: null,
+      provinces: null,
       sex: null,
       picID: "",
-      date: null
+      date: "",
     },
-    submit: false,
     menu: false,
     checkbox: false,
 
@@ -256,11 +164,11 @@ export default {
     imageUrl: "",
     imageFile: "",
 
-    items: ["male", "female"],
+    items: ["เพศชาย ", "เพศหญิง"],
 
     rulse: {
       name: [v => !!v || "กรุณากรอกชื่อ"],
-      rulesTel: [
+      rulseTel: [
         v => !!v || "กรุณากรอกเบอร์โทรศัพท์",
         v => (v && v.length <= 10) || "กรุณาตรวจกรอกข้อมูลให้ถูกต้อง"
       ]
@@ -273,7 +181,7 @@ export default {
   },
   methods: {
     addUser: async function() {
-      this.form.date = this.date;
+      // this.form.date = this.date;
       // console.log(this.form)
       // console.log(this.user)
       // console.log(this.picID)
@@ -309,8 +217,11 @@ export default {
         this.address.provinces.push(element.province_name);
       });
       this.address.all = userStores.state.rs_getAddress;
+
+      // console.log(this.address.all)
     },
-    clear() {
+    clearForm() {
+      this.form = Object.assign({}, this.defaultForm);
       this.$refs.form.reset();
     },
     pickFile() {
