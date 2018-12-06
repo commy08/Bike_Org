@@ -17,11 +17,12 @@
             </v-layout>
             
             <v-card light>
+                <v-card-actions>
                     <v-layout justify-space-around>
-                        <router-link to="/checkuser">ข้อมูลส่วนตัว</router-link>
-                        <router-link to="/checkuser">สมัครสมาชิกทั่วไป</router-link>
-                        <router-link to="/checkuser">สมัครสมาชิกผู้จัดกิจกรรม</router-link>
+                        <router-link to="/_formprofile">ข้อมูลส่วนตัว</router-link>
+                        <router-link to="/historys">ประวัติการสมัคร</router-link>
                     </v-layout>
+                </v-card-actions>
                 <router-view></router-view>
             </v-card>
         </v-container>
@@ -29,36 +30,13 @@
 </template>
 
 <script>
-const server_ip = 'http://10.94.180.139:8080/';
-import form from "./registerOrg";
-import router from "@/router";
 
 export default {
-  name: "checkuser",
   data() {
     return {
       name: null,
       picture: null
     };
-  },
-  methods: {
-    postregiUser() {
-      this.$http.get(server_ip + "registerUser").then(function(response) {
-          this.customers = response.body;
-        });
-    }
-  },
-  created: function() {
-    if (this.$router.params.alert) {
-      this.alert = $router.params.alert;
-    }
-    this.postregiUser();
-  },
-  updated: function() {
-    this.postregiUser();
-  },
-  components: {
-    "v-form": form
   }
 };
 </script>

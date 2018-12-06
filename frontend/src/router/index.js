@@ -6,23 +6,26 @@ import Footer from '@/pages/layout/footer'
 
 import Home from '@/pages/HomePages/home'
 
-import ProfileOrg from '@/pages/HomePages/user/profileOrg'
-import Addevent from '@/pages/HomePages/user/addevent'
-import Amound from '@/pages/HomePages/user/amound'
-import ckevent from '@/pages/HomePages/user/ckevent'
+import ProfileOrg from '@/pages/HomePages/org/profileOrg'
+import Addevent from '@/pages/HomePages/org/addevent'
+import Amound from '@/pages/HomePages/org/amound'
+import ckevent from '@/pages/HomePages/org/ckevent'
 
 import Callback from '@/pages/layout/callback'
 
 import ProfileUser from '@/pages/HomePages/user/profileUser'
+import _Formprofile from '@/pages/HomePages/user/_formprofile'
+import Historys from '@/pages/HomePages/user/historys'
+
 
 import Events from '@/pages/HomePages/event'
 import MTB_Bike from '@/pages/HomePages/user/mtbBike'
 import road_bike from '@/pages/HomePages/user/roadBike'
 
 import RegisterUser from '@/pages/HomePages/user/registerUser'
-import RegisterOrg from '@/pages/HomePages/user/registerOrg'
+import RegisterOrg from '@/pages/HomePages/org/registerOrg'
 
-import Calendar from '@/pages/HomePages/user/calendar'
+import Calendar from '@/pages/HomePages/org/calendar'
 
 const routes = [{
     path: '/',
@@ -104,11 +107,11 @@ const routes = [{
       header: Header,
       default: ProfileUser,
       footer: Footer
-    }
-    // children:[
-    //   { path : '', name : '',component :  },
-    //   { path : '/profileUser/', name : '',component :  }
-    // ],
+    },
+    children:[
+      { path : '/', name : '_formprofile',component : _Formprofile },
+      { path : '/profileUser/historys', name : 'historys',component : Historys },
+    ],
   },
   {
     path: '/RegisterUser',

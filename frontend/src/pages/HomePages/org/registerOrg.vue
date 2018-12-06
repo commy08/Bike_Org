@@ -182,6 +182,7 @@ export default {
   },
   methods: {
     addOrg: async function() {
+      console.log("imageFile",this.imageFile)
       // this.form.date = this.date;
       // console.log(this.form)
       // console.log(this.picID)
@@ -262,6 +263,7 @@ export default {
         fr.addEventListener("load", () => {
           this.imageUrlOrg = fr.result;
           this.imageFileOrg = files[0]; // this is an image file that can be sent to server...
+          
         });
       } else {
         this.imageNameOrg = "";
