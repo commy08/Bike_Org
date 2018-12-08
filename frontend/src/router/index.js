@@ -14,7 +14,7 @@ import ckevent from '@/pages/HomePages/org/ckevent'
 import Callback from '@/pages/layout/callback'
 
 import ProfileUser from '@/pages/HomePages/user/profileUser'
-import _Formprofile from '@/pages/HomePages/user/_formprofile'
+import Formprofile from '@/pages/HomePages/user/formprofile'
 import Historys from '@/pages/HomePages/user/historys'
 
 
@@ -25,7 +25,7 @@ import road_bike from '@/pages/HomePages/user/roadBike'
 import RegisterUser from '@/pages/HomePages/user/registerUser'
 import RegisterOrg from '@/pages/HomePages/org/registerOrg'
 
-import Calendar from '@/pages/HomePages/org/calendar'
+// import Calendar from '@/pages/HomePages/org/calendar'
 
 const routes = [{
     path: '/',
@@ -77,20 +77,20 @@ const routes = [{
         component: ckevent
       },
       {
-        path: '/profileOrg/addevent',
+        path: '/profileorg/addevent',
         name: 'addevent',
         component: Addevent
       },
       {
-        path: '/profileOrg/amound',
+        path: '/profileorg/amound',
         name: 'amound',
         component: Amound
       },
-      {
-        path: '/profileOrg/calendar',
-        name: 'calendar',
-        component: Calendar
-      }
+      // {
+      //   path: '/profileorg/calendar',
+      //   name: 'calendar',
+      //   component: Calendar
+      // }
     ],
   },
   {
@@ -109,8 +109,8 @@ const routes = [{
       footer: Footer
     },
     children:[
-      { path : '/', name : '_formprofile',component : _Formprofile },
-      { path : '/profileUser/historys', name : 'historys',component : Historys },
+      { path : '', name : 'formprofile',component : Formprofile },
+      { path : '/profileuser/historys', name : 'historys',component : Historys },
     ],
   },
   {

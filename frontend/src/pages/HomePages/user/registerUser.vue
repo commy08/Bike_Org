@@ -203,7 +203,6 @@ export default {
     getAddress: async function() {
       // console.log(this.form)
       // console.log(this.user)
-      // console.log(this.picID)
       if (!localStorage.access_token) router.push("/");
       // console.log("access_token")
       // console.log(optionts)

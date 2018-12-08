@@ -1,55 +1,54 @@
 <template>
-      <v-container fluid>
-
+  <v-container fluid>
     <v-layout row>
       <v-flex xs4>
-        <v-subheader>Prefix for dollar currency</v-subheader>
+        <v-subheader>ชื่อ - นามสกุล</v-subheader>
       </v-flex>
       <v-flex xs8>
         <v-text-field
-          label="Amount"
-          value="10.00"
-          prefix="$"
+          label="ชื่อ - นามสกุล"
+          value="fristname lastname"
+          outline
         ></v-text-field>
       </v-flex>
     </v-layout>
 
     <v-layout row>
       <v-flex xs4>
-        <v-subheader>Suffix for weight</v-subheader>
+        <v-subheader>เบอร์โทรศัพท์</v-subheader>
       </v-flex>
       <v-flex xs8>
         <v-text-field
-          label="Weight"
-          value="28.00"
-          suffix="lbs"
+          label="phone"
+          value="0864415389"
+          outline
         ></v-text-field>
       </v-flex>
     </v-layout>
 
     <v-layout row>
       <v-flex xs4>
-        <v-subheader>Suffix for email domain</v-subheader>
+        <v-subheader>ที่อยู่</v-subheader>
       </v-flex>
       <v-flex xs8>
         <v-text-field
-          label="Email address"
+          label="Address"
           value="example"
-          suffix="@gmail.com"
+          outline
         ></v-text-field>
       </v-flex>
     </v-layout>
 
     <v-layout row>
       <v-flex xs4>
-        <v-subheader>Suffix for time zone</v-subheader>
+        <v-subheader>วันเกิด</v-subheader>
       </v-flex>
       <v-flex xs8>
         <v-text-field
-          label="Label Text"
-          value="12:30:00"
-          type="time"
-          suffix="PST"
+          label="date"
+          value="2539 - 03 -19"
+          type="date"
+          outline
         ></v-text-field>
       </v-flex>
     </v-layout>
