@@ -1,14 +1,14 @@
  <!----------Make By YourName---------------->
   <template>
-    <v-flex >
-      <file-base64 v-bind:multiple="true" v-bind:done="getFiles"></file-base64>
-      
-      <v-flex v-for="img in imgs" :key="img.id">
-        <img style="width:160px; height:auto; margin-left:20px;" :src="img.base64" alt>
-      </v-flex>
+  <v-flex>
+    <file-base64 v-bind:multiple="true" v-bind:done="getFiles"></file-base64>
+
+    <v-flex v-for="img in imgs" :key="img.id">
+      <img style="width:160px; height:auto; margin-left:20px;" :src="img.base64" alt>
+    </v-flex>
     <!-- <pre>
       {{ imgs }}
-    </pre> -->
+    </pre>-->
   </v-flex>
 </template>
  
@@ -22,7 +22,12 @@ export default {
     fileBase64
   },
   /*-------------------------Set Component---------------------------------------*/
-  props: {},
+  props: {
+    done: {
+      type: Function,
+      default: () => {}
+    }
+  },
   /*-------------------------DataVarible---------------------------------------*/
   data() {
     return {
@@ -44,6 +49,7 @@ export default {
   methods: {
     getFiles(files) {
       this.imgs = files;
+      this.done(files)
       console.log(files);
     },
     /******* Methods default run ******/

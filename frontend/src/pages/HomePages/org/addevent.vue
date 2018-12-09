@@ -34,16 +34,66 @@
             required
             outline
           ></v-text-field>
-          <v-flex xs6>
-            <v-select :items="address.provinces" label="จังหวัด" outline></v-select>
-            <v-select :items="address.amphurs" label="อำเภอ" outline></v-select>
-          </v-flex>
 
           <v-flex xs6>
-            <calendar v-model="form.dateClose">:readonly="true" format="YYYY-MM-DD"</calendar>
-            <calendar v-model="form.dateDeadline">:readonly="true" format="YYYY-MM-DD"</calendar>
-            <calendar v-model="form.dateRace">:readonly="true" format="YYYY-MM-DD"</calendar>
+            <v-select
+              :items="address.provinces"
+              v-model="form.address.provinces"
+              label="จังหวัด"
+              outline
+            ></v-select>
+            <v-select :items="address.amphurs" v-model="form.address.amphurs" label="อำเภอ" outline></v-select>
           </v-flex>
+
+          <!-- <v-flex xs6>
+            <calendar v-model="form.dateClose" :readonly="true" format="YYYY-MM-DD"></calendar>
+            <calendar v-model="form.dateDeadline" :readonly="true" format="YYYY-MM-DD"></calendar>
+            <calendar v-model="form.dateRace" :readonly="true" format="YYYY-MM-DD"></calendar>
+            <v-text-field
+              v-model="form.dateClose"
+              :rules="rules.name"
+              color="teal"
+              required
+              outline
+            >
+              <v-flex slot="label">
+                กฎกติกาการแข่งกัน
+                <small>(รายละเอียดข้างต้น)</small>
+              </v-flex>
+            </v-text-field>
+          </v-flex> -->
+
+          <form>
+            <v-flex row fill-height align-center justify-center>&nbsp;&nbsp;&nbsp;
+              <v-text-field
+                v-model="form.dateClose"
+                :rules="rules.name"
+                color="teal"
+                required
+                outline
+                type="date"
+              >
+                <v-flex slot="label">
+                  dateClose
+                </v-flex>
+              </v-text-field>
+              &nbsp;
+              <span>ถึง</span>
+              &nbsp;
+               <v-text-field
+                v-model="form.dateClose"
+                :rules="rules.name"
+                color="teal"
+                required
+                outline
+                type="date"
+              >
+                <v-flex slot="label">
+                  dateClose
+                </v-flex>
+              </v-text-field>
+            </v-flex>
+          </form>
 
           <v-flex xs12>
             <v-textarea v-model="form.rule" :rules="rules.name" color="teal" required outline>
@@ -60,23 +110,37 @@
             </v-textarea>
           </v-flex>
 
-          <v-form v-model="form.payment">
+          <v-form>
             <v-flex row fill-height align-center justify-center>&nbsp;&nbsp;&nbsp;
-              <v-text-field :rules="rules.name" color="teal" required outline>
+              <v-text-field
+                :rules="rules.name"
+                color="teal"
+                required
+                outline
+                v-model="form.payment.namebank"
+              >
                 <v-flex slot="label">
                   การจ่ายเงิน
                   <small>(ชื่อธนาคาร)</small>
                 </v-flex>
               </v-text-field>&nbsp;&nbsp;
-              <v-text-field :rules="rules.name" color="teal" required outline>
-                <v-flex slot="label">
-                  ชื่อบัญชี
-                </v-flex>
+              <v-text-field
+                :rules="rules.name"
+                color="teal"
+                required
+                outline
+                v-model="form.payment.nameaccount"
+              >
+                <v-flex slot="label">ชื่อบัญชี</v-flex>
               </v-text-field>&nbsp;&nbsp;
-              <v-text-field :rules="rules.name" color="teal" required outline>
-                <v-flex slot="label">
-                  เลขบัญชี
-                </v-flex>
+              <v-text-field
+                :rules="rules.name"
+                color="teal"
+                required
+                outline
+                v-model="form.payment.numbank"
+              >
+                <v-flex slot="label">เลขบัญชี</v-flex>
               </v-text-field>
             </v-flex>
           </v-form>
@@ -86,7 +150,7 @@
           </v-flex>
 
           <v-flex xs6>
-            <Root v-model="form.pic"></Root>
+            <Root v-bind:done="getFiles"></Root>
           </v-flex>
 
           <v-checkbox
@@ -113,12 +177,12 @@
 <script>
 import userStores from "@/stores/userStores";
 import router from "@/router";
-import calendar from "./calendar";
+// import calendar from "./calendar";
 import Root from "@/pages/Root";
 
 export default {
   components: {
-    calendar,
+    // calendar,
     Root
   },
 
@@ -128,12 +192,15 @@ export default {
       provinces: [],
       all: []
     },
+
     form: {
       name: null,
       dateil: null,
       location: null,
-      amphurs: null,
-      provinces: null,
+      address: {
+        amphurs: null,
+        provinces: null
+      },
       dateClose: null,
       dateDeadline: null,
       dateRace: null,
@@ -141,9 +208,13 @@ export default {
       rule: null,
       user_id: null,
       reward: null,
-      payment: null,
+      payment: {
+        namebank: null,
+        nameaccount: null,
+        numbank: null
+      },
       status: null,
-      pic: null
+      imgs: []
     },
     type: ["จักรยานภูเขา", "จักรยานทางเรียบ"],
     rules: {
@@ -153,6 +224,10 @@ export default {
     }
   }),
   methods: {
+    getFiles(files) {
+      this.form.imgs = files;
+      // console.log(files);
+    },
     addEvent: async function() {
       // this.form.date = this.date;
       // console.log(this.form)
@@ -162,7 +237,6 @@ export default {
       let optionts = {
         access_token: localStorage.access_token,
         form: this.form
-        // address: this.address
       };
       // console.log(optionts)
       await userStores.dispatch("postAddevent", optionts);
@@ -192,8 +266,11 @@ export default {
         name: null,
         dateil: null,
         location: null,
-        amphurs: null,
-        provinces: null,
+        address: {
+          amphurs: null,
+          provinces: null,
+          all: []
+        },
         dateClose: null,
         dateDeadline: null,
         dateRace: null,

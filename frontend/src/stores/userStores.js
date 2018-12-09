@@ -4,7 +4,7 @@ import axios from '@/axios';
 
 Vue.use(Vuex)
 
-const server_ip = 'http://192.168.1.104:8080/';
+const server_ip = 'http://192.168.1.105:8082/';
 
 const userStores = new Vuex.Store({
     state: {
