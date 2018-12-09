@@ -190,7 +190,7 @@ export default {
       // Lazily load input items
       await userStores.dispatch("getAddress");
       this.items = userStores.state.rs_getAddress.provinces;
-      this.isLoading = false;
+      this.isLoading = false; 
     }
   }
 };

@@ -3,11 +3,6 @@
     <v-card>
       <v-card-title class="grey lighten-4 py-4 title">เพิ่มสร้างกิจกรรม</v-card-title>
       <v-card-text class="light">
-        <!-- <v-snackbar v-model="snackbar" absolute top right color="success">
-          <span>Registration successful!</span>
-          <v-icon dark>check_circle</v-icon>
-        </v-snackbar>-->
-        <!-- <v-form ref="form" @submit.prevent="submit" lazy-validation> -->
         <v-flex>
           <v-text-field
             v-model="form.name"
@@ -35,65 +30,109 @@
             outline
           ></v-text-field>
 
-          <v-flex xs6>
+          <!-- <v-flex row fill-height justify-center>
+            &nbsp;&nbsp;&nbsp;
             <v-select
               :items="address.provinces"
               v-model="form.address.provinces"
               label="จังหวัด"
               outline
             ></v-select>
-            <v-select :items="address.amphurs" v-model="form.address.amphurs" label="อำเภอ" outline></v-select>
-          </v-flex>
+            &nbsp;
+            <v-select  
+              :items="address.amphurs" 
+              v-model="form.address.amphurs" 
+              label="อำเภอ" 
+              outline></v-select>
+          </v-flex> -->
 
-          <!-- <v-flex xs6>
-            <calendar v-model="form.dateClose" :readonly="true" format="YYYY-MM-DD"></calendar>
-            <calendar v-model="form.dateDeadline" :readonly="true" format="YYYY-MM-DD"></calendar>
-            <calendar v-model="form.dateRace" :readonly="true" format="YYYY-MM-DD"></calendar>
+          <!-- start dateClose -->
+          <v-flex row fill-height justify-center>
+            &nbsp;&nbsp;&nbsp;
             <v-text-field
               v-model="form.dateClose"
               :rules="rules.name"
               color="teal"
               required
               outline
+              type="date"
             >
-              <v-flex slot="label">
-                กฎกติกาการแข่งกัน
-                <small>(รายละเอียดข้างต้น)</small>
+              <v-flex slot="label">dateClose
+                <small>(เริ่มต้น)</small>
+              </v-flex>
+            </v-text-field>&nbsp;
+            <span>ถึง</span>
+            &nbsp;
+            <v-text-field
+              v-model="form.dateClose"
+              :rules="rules.name"
+              color="teal"
+              required
+              outline
+              type="date"
+            >
+              <v-flex slot="label">dateClose
+                <small>(สิ้นสุด)</small>
               </v-flex>
             </v-text-field>
-          </v-flex> -->
+          </v-flex>
+          <!-- end dateDeadline -->
 
-          <form>
-            <v-flex row fill-height align-center justify-center>&nbsp;&nbsp;&nbsp;
-              <v-text-field
-                v-model="form.dateClose"
-                :rules="rules.name"
-                color="teal"
-                required
-                outline
-                type="date"
-              >
-                <v-flex slot="label">
-                  dateClose
-                </v-flex>
-              </v-text-field>
-              &nbsp;
-              <span>ถึง</span>
-              &nbsp;
-               <v-text-field
-                v-model="form.dateClose"
-                :rules="rules.name"
-                color="teal"
-                required
-                outline
-                type="date"
-              >
-                <v-flex slot="label">
-                  dateClose
-                </v-flex>
-              </v-text-field>
-            </v-flex>
-          </form>
+          <!-- start dateDeadline -->
+          <v-flex row fill-height justify-center>
+            &nbsp;&nbsp;&nbsp;
+            <v-text-field
+              v-model="form.dateDeadline"
+              :rules="rules.name"
+              color="teal"
+              required
+              outline
+              type="date"
+            >
+              <v-flex slot="label">dateDeadline</v-flex>
+            </v-text-field>&nbsp;
+            <span>ถึง</span>
+            &nbsp;
+            <v-text-field
+              v-model="form.dateDeadline"
+              :rules="rules.name"
+              color="teal"
+              required
+              outline
+              type="date"
+            >
+              <v-flex slot="label">dateDeadline</v-flex>
+            </v-text-field>
+          </v-flex>
+          <!-- end dateClose -->
+          
+          <!-- start dateRace -->
+          <v-flex row fill-height justify-center>
+            &nbsp;&nbsp;&nbsp;
+            <v-text-field
+              v-model="form.dateRace"
+              :rules="rules.name"
+              color="teal"
+              required
+              outline
+              type="date"
+            >
+              <v-flex slot="label">dateRace</v-flex>
+            </v-text-field>&nbsp;
+            <span>ถึง</span>
+            &nbsp;
+            <v-text-field
+              v-model="form.dateRace"
+              :rules="rules.name"
+              color="teal"
+              required
+              outline
+              type="date"
+            >
+              <v-flex slot="label">dateRace</v-flex>
+            </v-text-field>
+          </v-flex>
+          <!-- end dateRace -->
 
           <v-flex xs12>
             <v-textarea v-model="form.rule" :rules="rules.name" color="teal" required outline>
@@ -179,11 +218,13 @@ import userStores from "@/stores/userStores";
 import router from "@/router";
 // import calendar from "./calendar";
 import Root from "@/pages/Root";
+import city from "@/pages/city";
 
 export default {
   components: {
     // calendar,
-    Root
+    Root,
+    city
   },
 
   data: () => ({

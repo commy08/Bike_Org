@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "lodash": "^4.17.11",
     "npm": "^6.4.1",
     "vue": "^2.5.17",
     "vue-base64-file-upload": "^1.0.4",

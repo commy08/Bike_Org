@@ -113,8 +113,8 @@ const userStores = new Vuex.Store({
             })
             context.commit("getAddress", data)
         },
-        async postAddevent(context,options) {
-            let data = await axios.post(server_ip + "api/event",options, {
+        async postAddevent(context, options) {
+            let data = await axios.post(server_ip + "api/event", options, {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                 }

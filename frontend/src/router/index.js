@@ -25,9 +25,19 @@ import road_bike from '@/pages/HomePages/user/roadBike'
 import RegisterUser from '@/pages/HomePages/user/registerUser'
 import RegisterOrg from '@/pages/HomePages/org/registerOrg'
 
-// import Calendar from '@/pages/HomePages/org/calendar'
+import city from '@/pages/HomePages/city'
 
-const routes = [{
+const routes = [
+  {
+    path: '/city',
+    name: 'city',
+    components: {
+      header: Header,
+      default: city,
+      footer: Footer
+    }
+  },
+  {
     path: '/',
     name: 'home',
     components: {
