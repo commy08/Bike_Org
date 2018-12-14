@@ -25,7 +25,8 @@ import road_bike from '@/pages/HomePages/user/roadBike'
 import RegisterUser from '@/pages/HomePages/user/registerUser'
 import RegisterOrg from '@/pages/HomePages/org/registerOrg'
 
-import city from '@/pages/HomePages/city'
+import City from '@/pages/city'
+import AllEvent from '@/pages/allEvent'
 
 const routes = [
   {
@@ -33,7 +34,16 @@ const routes = [
     name: 'city',
     components: {
       header: Header,
-      default: city,
+      default: City,
+      footer: Footer
+    }
+  },
+  {
+    path: '/allevent',
+    name: 'AllEvents',
+    components: {
+      header: Header,
+      default: AllEvent,
       footer: Footer
     }
   },
@@ -96,11 +106,6 @@ const routes = [
         name: 'amound',
         component: Amound
       },
-      // {
-      //   path: '/profileorg/calendar',
-      //   name: 'calendar',
-      //   component: Calendar
-      // }
     ],
   },
   {
@@ -119,7 +124,7 @@ const routes = [
       footer: Footer
     },
     children:[
-      { path : '', name : 'formprofile',component : Formprofile },
+      { path : '/profileuser', name : 'formprofile',component : Formprofile },
       { path : '/profileuser/historys', name : 'historys',component : Historys },
     ],
   },

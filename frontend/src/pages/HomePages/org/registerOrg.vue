@@ -7,6 +7,7 @@
             <v-card-title class="title blue-grey lighten-1">กรุณากรอกข้อมูลส่วนตัว</v-card-title>
             <v-card-text>
               <!-- <v-form ref="form"  v-model="org" lazy-validation> -->
+              <v-flex>
                 <v-text-field
                   v-model="form.OrgName"
                   :rulse="rulse.name"
@@ -14,25 +15,81 @@
                   required
                   outline
                 ></v-text-field>
-                <v-text-field v-model="form.firstname" :rulse="rulse.name" label="ชื่อ" outline required></v-text-field>
-                <v-text-field v-model="form.lastname" :rulse="rulse.name" label="นามสกุล" outline required></v-text-field>
-                
-                  <v-text-field
-                    v-model="form.tel"
-                    :rulse="rulse.rulseTel"
-                    :counter="10"
-                    :maxlength="10"
-                    label="เบอร์มือถือ"
-                    mask="phone"
-                    required
-                    outline
-                  ></v-text-field>
-                <v-text-field v-model="form.address" :rulse="rulse.name" label="ที่อยู่" outline required></v-text-field>
-                <v-flex>
-                  <v-select :items="address.provinces" v-model="form.provinces" label="จังหวัด" outline></v-select>
-                  <v-select :items="address.amphurs" v-model="form.amphurs" label="อำเภอ" outline></v-select>
-                </v-flex>
 
+                <v-text-field
+                  v-model="form.firstname"
+                  :rulse="rulse.name"
+                  label="ชื่อ"
+                  outline
+                  required
+                ></v-text-field>
+                <v-text-field
+                  v-model="form.lastname"
+                  :rulse="rulse.name"
+                  label="นามสกุล"
+                  outline
+                  required
+                ></v-text-field>
+
+                <v-text-field
+                  v-model="form.tel"
+                  :rulse="rulse.rulseTel"
+                  :counter="10"
+                  :maxlength="10"
+                  label="เบอร์มือถือ"
+                  mask="phone"
+                  required
+                  outline
+                ></v-text-field>
+
+                <v-textarea
+                  v-model="form.location"
+                  :rulse="rulse.name"
+                  label="ที่อยู่"
+                  outline
+                  required
+                ></v-textarea>
+
+                <v-layout row wrap>
+                  <v-flex xs6 sm6>
+                    <v-select
+                      :items="address.provinces"
+                      v-model="form.address.provinces"
+                      label="จังหวัด"
+                      outline
+                    ></v-select>
+                  </v-flex>
+
+                  <v-flex xs6 sm6>
+                    <v-select
+                      :items="address.amphurs"
+                      v-model="form.address.amphurs"
+                      label="อำเภอ"
+                      outline
+                    ></v-select>
+                  </v-flex>
+                </v-layout>
+              </v-flex>
+              
+              <v-layout row wrap>
+                <v-flex xs8 sm8 v-for="n in range_bank" :key="n">
+                  <v-select
+                    :items="bank.bank_name"
+                    v-model="form.banks.bankName[n-1]"
+                    label="เลือกธนาคารการจ่ายเงิน"
+                    outline
+                  ></v-select>
+                  <v-text-field v-model="form.banks.accountName[n-1]" label="ชื่อบัญชี" outline></v-text-field>
+                  <v-text-field v-model="form.banks.accountNum[n-1]" label="เลขบัญชี" outline></v-text-field>
+                </v-flex>
+                <v-flex xs2 sm2>
+                  <v-btn fab dark color="amber" @click="range_bank++">
+                    <v-icon dark>add</v-icon>
+                  </v-btn>
+                </v-flex>
+              </v-layout>
+
+              <v-layout row wrap>
                 <v-flex xs12 lg6>
                   <v-menu
                     ref="menu"
@@ -51,6 +108,7 @@
                       label="วันก่อตั้งร้าน"
                       prepend-icon="event"
                       readonly
+                      outline
                     ></v-text-field>
                     <v-date-picker
                       ref="picker"
@@ -69,56 +127,58 @@
                     :maxlength="13"
                     label="เลขใบทะเบียนพาณิชย์"
                     required
+                    outline
                   ></v-text-field>
                 </v-flex>
+              </v-layout>
 
-                <v-flex xs9 class="text-xs-center text-sm-center text-md-center text-lg-center">
-                  <img :src="imageUrl" height="150" v-if="imageUrl">
-                  <v-text-field
-                    label="อัพโหลด : รูปบัตรประชาชน"
-                    @click="pickFile"
-                    v-model="imageName"
-                    prepend-icon="attach_file"
-                  ></v-text-field>
-                  <input
-                    type="file"
-                    style="display: none"
-                    ref="image"
-                    accept="image/*"
-                    @change="onFilePicked"
-                  >
-                </v-flex>
-                <v-flex xs9 class="text-xs-center text-sm-center text-md-center text-lg-center">
-                  <img :src="imageUrlOrg" height="150" v-if="imageUrlOrg">
-                  <v-text-field
-                    label="อัพโหลด : รูปใบทะเบียนพาณิชย์"
-                    @click="pickFileOrg"
-                    v-model="imageNameOrg"
-                    prepend-icon="attach_file"
-                  ></v-text-field>
-                  <input
-                    type="file"
-                    style="display: none"
-                    ref="imageOrg"
-                    accept="imageOrg/*"
-                    @change="onFilePickedOrg"
-                  >
-                </v-flex>
+              <v-flex xs9 class="text-xs-center text-sm-center text-md-center text-lg-center">
+                <img :src="imageUrl" height="150" v-if="imageUrl">
+                <v-text-field
+                  label="อัพโหลด : รูปบัตรประชาชน"
+                  @click="pickFile"
+                  v-model="imageName"
+                  prepend-icon="attach_file"
+                ></v-text-field>
+                <input
+                  type="file"
+                  style="display: none"
+                  ref="image"
+                  accept="image/*"
+                  @change="onFilePicked"
+                >
+              </v-flex>
+              <v-flex xs9 class="text-xs-center text-sm-center text-md-center text-lg-center">
+                <img :src="imageUrlOrg" height="150" v-if="imageUrlOrg">
+                <v-text-field
+                  label="อัพโหลด : รูปใบทะเบียนพาณิชย์"
+                  @click="pickFileOrg"
+                  v-model="imageNameOrg"
+                  prepend-icon="attach_file"
+                ></v-text-field>
+                <input
+                  type="file"
+                  style="display: none"
+                  ref="imageOrg"
+                  accept="imageOrg/*"
+                  @change="onFilePickedOrg"
+                >
+              </v-flex>
 
-                <v-checkbox
-                  v-model="form.checkbox"
-                  :rulse="[v => !!v || 'You must agree to continue!']"
-                  label="ยืนยันการสมัครสมาชิก"
-                  required
-                ></v-checkbox>
+              <v-checkbox
+                v-model="form.checkbox"
+                :rulse="[v => !!v || 'You must agree to continue!']"
+                label="ยืนยันการสมัครสมาชิก"
+                required
+              ></v-checkbox>
 
-                <v-btn
-                  color="blue darken-3"
-                  @click="addOrg();"
-                  :disabled="!formIsValid"
-                  type="submit"
-                >ยืนยันการสมัคร</v-btn>
-                <v-btn @click="clearForm">ยกเลิก</v-btn>
+              <v-btn
+                color="blue darken-3"
+                @click="addOrg();"
+                :disabled="!formIsValid"
+                type="submit"
+              >ยืนยันการสมัคร</v-btn>
+              <v-btn @click="clearForm()">ยกเลิก</v-btn>
               <!-- </v-form> -->
             </v-card-text>
           </v-card>
@@ -128,15 +188,21 @@
   </v-app>
 </template>
 
+
 <script>
 import userStores from "@/stores/userStores";
 import router from "@/router";
-
 export default {
   data: () => ({
+    range_bank: 1,
     address: {
       amphurs: [],
       provinces: [],
+      all: []
+    },
+    bank: {
+      bank_name: [],
+      bank_id: [],
       all: []
     },
     form: {
@@ -144,14 +210,20 @@ export default {
       firstname: null,
       lastname: null,
       tel: null,
-      address: null,
-      amphurs: null,
-      provinces: null,
-      sex: null,
+      location: null,
       tradeNum: null,
+      address: {
+        amphurs: null,
+        provinces: null
+      },
+      banks: {
+        bankName: [],
+        accountName: [],
+        accountNum: []
+      },
       picID: "",
       picORG: "",
-      date: "",
+      date: ""
     },
     Submit: false,
     menu: false,
@@ -166,7 +238,7 @@ export default {
     imageName: "",
     imageUrl: "",
     imageFile: "",
-    
+
     rulse: {
       name: [v => !!v || "กรุณากรอกข้อมูล"],
       rulseTel: [
@@ -182,9 +254,9 @@ export default {
   },
   methods: {
     addOrg: async function() {
-      console.log("imageFile",this.imageFile)
+      console.log("imageFile", this.imageFile);
       // this.form.date = this.date;
-      // console.log(this.form)
+      console.log(this.form);
       // console.log(this.picID)
       if (!localStorage.access_token) router.push("/");
       let optionts = {
@@ -216,9 +288,37 @@ export default {
       });
       this.address.all = userStores.state.rs_getAddress;
     },
+    getBank: async function() {
+      if (!localStorage.access_token) router.push("/");
+      // console.log("access_token")
+      await userStores.dispatch("getBank");
+      userStores.state.rs_getBank.forEach(element => {
+        this.bank.bank_name.push(element.BankName);
+      });
+      this.bank.all = userStores.state.rs_getBank;
+    },
     clearForm() {
-      this.form = Object.assign({}, this.defaultForm);
-      this.$refs.form.reset();
+      this.form = {
+        OrgName: null,
+        firstname: null,
+        lastname: null,
+        tel: null,
+        location: null,
+        address: {
+          amphurs: null,
+          provinces: null
+        },
+        sex: null,
+        tradeNum: null,
+        banks: {
+          bankName: [],
+          accountName: [],
+          accountNum: []
+        },
+        picID: "",
+        picORG: "",
+        date: ""
+      };
     },
     pickFile() {
       this.$refs.image.click();
@@ -263,7 +363,6 @@ export default {
         fr.addEventListener("load", () => {
           this.imageUrlOrg = fr.result;
           this.imageFileOrg = files[0]; // this is an image file that can be sent to server...
-          
         });
       } else {
         this.imageNameOrg = "";
@@ -282,6 +381,7 @@ export default {
   },
   async mounted() {
     await this.getAddress();
+    await this.getBank();
   }
 };
 </script>

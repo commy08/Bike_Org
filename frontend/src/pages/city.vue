@@ -1,27 +1,25 @@
 <!----------Make By YourName---------------->
  <template>
   <v-content>
-    <v-select
-      v-model="form.city"
-      @change="getAmp"
-      :items="city"
-      item-value="id"
-      item-text="province_name"
-      box
-      label="Select City"
-    ></v-select>
-
-    <v-select
-      v-model="form.amp"
-      :items="amp"
-      item-value="id"
-      item-text="amphur_name"
-      box
-      label="Select Amp"
-    ></v-select>
-
-    <h2>CityId = {{form.city}}</h2>
-    <h2>AmpId = {{form.amp}}</h2>
+    <v-flex column fill-height justify-center>
+      <v-select
+        v-model="form.city"
+        @change="getAmp"
+        :items="city"
+        item-value="id"
+        item-text="province_name"
+        outline
+        label="Select City"
+      ></v-select>
+      <v-select
+        v-model="form.amp"
+        :items="amp"
+        item-value="id"
+        item-text="amphur_name"
+        outline
+        label="Select Amp"
+      ></v-select>
+    </v-flex>
   </v-content>
 </template>
 

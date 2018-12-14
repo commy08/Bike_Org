@@ -4,7 +4,7 @@
     <file-base64 v-bind:multiple="true" v-bind:done="getFiles"></file-base64>
 
     <v-flex v-for="img in imgs" :key="img.id">
-      <img style="width:160px; height:auto; margin-left:20px;" :src="img.base64" alt>
+      <img style="width:160px; height:auto; margin-left:20px;" :src="img.base64" alt >
     </v-flex>
     <!-- <pre>
       {{ imgs }}

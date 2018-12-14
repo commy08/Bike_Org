@@ -9,15 +9,6 @@
           </span>
         </router-link>
       </v-toolbar-title>
-
-      <!-- <v-text-field
-        flat
-        solo-inverted
-        hide-details
-        prepend-icon="search"
-        label="ค้นหารายการแข่งขัน..."
-        value="ค้นหา"
-      ></v-text-field>-->
       <v-autocomplete
         v-model="form.model"
         :items="items"
@@ -80,7 +71,7 @@
       </v-menu>
 
       <v-menu v-else-if="user.type == 'org'" offset-y>
-        <v-btn dark color="light-green accent-4" slot="activator">{{ user.firstname }}</v-btn>
+        <v-btn dark color="light-green accent-4" slot="activator">{{ user.OrgName }}</v-btn>
         <v-list>
           <v-list-tile v-for="(item, index) in itemsOrg" :key="index">
             <v-list-tile-title>
@@ -166,13 +157,13 @@ export default {
         form: this.form
       };
       // console.log(optionts)
-      localStorage.search = optionts
+      localStorage.searchs = optionts
       // console.log(this.form)
-      // await userStores.dispatch("getSearch", optionts);
-      // // console.log(userStores.state.registerUser)
-      // if (userStores.state.searchs.status) {
-      //   router.go("/event");
-      // } 
+      await userStores.dispatch("getSearch", optionts);
+      // console.log(userStores.state.searchs)
+      if (userStores.state.searchs.status) {
+        router.push("/allevent");
+      } 
     },
   },
   async mounted() {

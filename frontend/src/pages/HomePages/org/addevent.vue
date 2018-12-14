@@ -7,207 +7,202 @@
           <v-text-field
             v-model="form.name"
             :rules="rules.name"
-            label="ชื่อกิจกรรม"
+            label="ชื่อกิจกรรม*"
             color="purple darken-2"
             required
             outline
           ></v-text-field>
-        </v-flex>
-        <v-flex xs12>
           <v-textarea v-model="form.dateil" :rules="rules.dateil" color="teal" required outline>
             <v-flex slot="label">
-              รายละเอียด
+              รายละเอียด*
               <small>(รายละเอียดข้างต้น)</small>
             </v-flex>
           </v-textarea>
+          <v-text-field name="youtube" v-model="form.youtube" outline>
+            <v-flex slot="label">
+              ลิงค์วิดีโอ
+              <small>(วิดีโอแนะนำกิจกรรม)</small>
+            </v-flex>
+          </v-text-field>
+          <v-textarea v-model="form.location" :rules="rules.location" required outline>
+            <v-flex slot="label">ที่อยู่การแข่งขัน</v-flex>
+          </v-textarea>
         </v-flex>
-        <v-flex>
-          <v-text-field
-            v-model="form.location"
-            :rules="rules.location"
-            label="ที่อยู่"
-            required
-            outline
-          ></v-text-field>
-
-          <!-- <v-flex row fill-height justify-center>
-            &nbsp;&nbsp;&nbsp;
+        
+        <v-layout row wrap>
+          <v-flex xs6 sm6>
             <v-select
               :items="address.provinces"
               v-model="form.address.provinces"
               label="จังหวัด"
               outline
             ></v-select>
-            &nbsp;
-            <v-select  
-              :items="address.amphurs" 
-              v-model="form.address.amphurs" 
-              label="อำเภอ" 
-              outline></v-select>
-          </v-flex> -->
-
-          <!-- start dateClose -->
-          <v-flex row fill-height justify-center>
-            &nbsp;&nbsp;&nbsp;
-            <v-text-field
-              v-model="form.dateClose"
-              :rules="rules.name"
-              color="teal"
-              required
-              outline
-              type="date"
-            >
-              <v-flex slot="label">dateClose
-                <small>(เริ่มต้น)</small>
-              </v-flex>
-            </v-text-field>&nbsp;
-            <span>ถึง</span>
-            &nbsp;
-            <v-text-field
-              v-model="form.dateClose"
-              :rules="rules.name"
-              color="teal"
-              required
-              outline
-              type="date"
-            >
-              <v-flex slot="label">dateClose
-                <small>(สิ้นสุด)</small>
-              </v-flex>
-            </v-text-field>
-          </v-flex>
-          <!-- end dateDeadline -->
-
-          <!-- start dateDeadline -->
-          <v-flex row fill-height justify-center>
-            &nbsp;&nbsp;&nbsp;
-            <v-text-field
-              v-model="form.dateDeadline"
-              :rules="rules.name"
-              color="teal"
-              required
-              outline
-              type="date"
-            >
-              <v-flex slot="label">dateDeadline</v-flex>
-            </v-text-field>&nbsp;
-            <span>ถึง</span>
-            &nbsp;
-            <v-text-field
-              v-model="form.dateDeadline"
-              :rules="rules.name"
-              color="teal"
-              required
-              outline
-              type="date"
-            >
-              <v-flex slot="label">dateDeadline</v-flex>
-            </v-text-field>
-          </v-flex>
-          <!-- end dateClose -->
-          
-          <!-- start dateRace -->
-          <v-flex row fill-height justify-center>
-            &nbsp;&nbsp;&nbsp;
-            <v-text-field
-              v-model="form.dateRace"
-              :rules="rules.name"
-              color="teal"
-              required
-              outline
-              type="date"
-            >
-              <v-flex slot="label">dateRace</v-flex>
-            </v-text-field>&nbsp;
-            <span>ถึง</span>
-            &nbsp;
-            <v-text-field
-              v-model="form.dateRace"
-              :rules="rules.name"
-              color="teal"
-              required
-              outline
-              type="date"
-            >
-              <v-flex slot="label">dateRace</v-flex>
-            </v-text-field>
-          </v-flex>
-          <!-- end dateRace -->
-
-          <v-flex xs12>
-            <v-textarea v-model="form.rule" :rules="rules.name" color="teal" required outline>
-              <v-flex slot="label">
-                กฎกติกาการแข่งกัน
-                <small>(รายละเอียดข้างต้น)</small>
-              </v-flex>
-            </v-textarea>
           </v-flex>
 
-          <v-flex xs12>
-            <v-textarea v-model="form.reward" :rules="rules.name" color="teal" required outline>
-              <v-flex slot="label">รางวัลการแข่งขัน</v-flex>
-            </v-textarea>
+          <v-flex xs6 sm6>
+            <v-select :items="address.amphurs" v-model="form.address.amphurs" label="อำเภอ" outline></v-select>
           </v-flex>
+        </v-layout>
 
-          <v-form>
-            <v-flex row fill-height align-center justify-center>&nbsp;&nbsp;&nbsp;
-              <v-text-field
-                :rules="rules.name"
-                color="teal"
-                required
-                outline
-                v-model="form.payment.namebank"
-              >
-                <v-flex slot="label">
-                  การจ่ายเงิน
-                  <small>(ชื่อธนาคาร)</small>
-                </v-flex>
-              </v-text-field>&nbsp;&nbsp;
-              <v-text-field
-                :rules="rules.name"
-                color="teal"
-                required
-                outline
-                v-model="form.payment.nameaccount"
-              >
-                <v-flex slot="label">ชื่อบัญชี</v-flex>
-              </v-text-field>&nbsp;&nbsp;
-              <v-text-field
-                :rules="rules.name"
-                color="teal"
-                required
-                outline
-                v-model="form.payment.numbank"
-              >
-                <v-flex slot="label">เลขบัญชี</v-flex>
-              </v-text-field>
-            </v-flex>
-          </v-form>
-
-          <v-flex xs6>
-            <v-select v-model="form.type" :items="type" label="ประเภท" outline></v-select>
-          </v-flex>
-
-          <v-flex xs6>
-            <Root v-bind:done="getFiles"></Root>
-          </v-flex>
-
-          <v-checkbox
-            v-model="form.checkbox"
-            :rules="[v => !!v || 'You must agree to continue!']"
-            label="ยืนยันการสมัครสมาชิก"
+        <!-- start dateClose -->
+        <v-flex row fill-height justify-center>
+          &nbsp;&nbsp;&nbsp;
+          <v-text-field
+            v-model="form.dateClose"
+            :rules="rules.name"
+            color="teal"
             required
-          ></v-checkbox>
-
-          <v-btn
-            color="blue darken-3"
-            @click="addEvent();"
-            :disabled="!formIsValid"
-            type="submit"
-          >ยืนยันการสมัคร</v-btn>
-          <v-btn @click="clearForm()">ยกเลิก</v-btn>
+            outline
+            type="date"
+          >
+            <v-flex slot="label">
+              dateClose
+              <small>(เริ่มต้น)</small>
+            </v-flex>
+          </v-text-field>&nbsp;
+          <span>ถึง</span>
+          &nbsp;
+          <v-text-field
+            v-model="form.dateClose"
+            :rules="rules.name"
+            color="teal"
+            required
+            outline
+            type="date"
+          >
+            <v-flex slot="label">
+              dateClose
+              <small>(สิ้นสุด)</small>
+            </v-flex>
+          </v-text-field>
         </v-flex>
-        <!-- </v-form> -->
+        <!-- end dateDeadline -->
+        <!-- start dateDeadline -->
+        <v-flex row fill-height justify-center>
+          &nbsp;&nbsp;&nbsp;
+          <v-text-field
+            v-model="form.dateDeadline"
+            :rules="rules.name"
+            color="teal"
+            required
+            outline
+            type="date"
+          >
+            <v-flex slot="label">dateDeadline</v-flex>
+          </v-text-field>&nbsp;
+          <span>ถึง</span>
+          &nbsp;
+          <v-text-field
+            v-model="form.dateDeadline"
+            :rules="rules.name"
+            color="teal"
+            required
+            outline
+            type="date"
+          >
+            <v-flex slot="label">dateDeadline</v-flex>
+          </v-text-field>
+        </v-flex>
+        <!-- end dateClose -->
+        <!-- start dateRace -->
+        <v-flex row fill-height justify-center>
+          &nbsp;&nbsp;&nbsp;
+          <v-text-field
+            v-model="form.dateRace"
+            :rules="rules.name"
+            color="teal"
+            required
+            outline
+            type="date"
+          >
+            <v-flex slot="label">dateRace</v-flex>
+          </v-text-field>&nbsp;
+          <span>ถึง</span>
+          &nbsp;
+          <v-text-field
+            v-model="form.dateRace"
+            :rules="rules.name"
+            color="teal"
+            required
+            outline
+            type="date"
+          >
+            <v-flex slot="label">dateRace</v-flex>
+          </v-text-field>
+        </v-flex>
+        <!-- end dateRace -->
+        <v-flex xs12>
+          <v-textarea v-model="form.rule" :rules="rules.name" color="teal" required outline>
+            <v-flex slot="label">
+              กฎกติกาการแข่งกัน*
+              <small>(รายละเอียดข้างต้น)</small>
+            </v-flex>
+          </v-textarea>
+        </v-flex>
+
+        <v-flex xs12>
+          <v-textarea v-model="form.reward" :rules="rules.name" color="teal" required outline>
+            <v-flex slot="label">รางวัลการแข่งขัน*</v-flex>
+          </v-textarea>
+        </v-flex>
+
+        <v-form>
+          <v-flex row fill-height align-center justify-center>&nbsp;&nbsp;&nbsp;
+            <v-text-field
+              :rules="rules.name"
+              color="teal"
+              required
+              outline
+              v-model="form.payment.namebank"
+            >
+              <v-flex slot="label">
+                การจ่ายเงิน*
+                <small>(ชื่อธนาคาร)</small>
+              </v-flex>
+            </v-text-field>&nbsp;&nbsp;
+            <v-text-field
+              :rules="rules.name"
+              color="teal"
+              required
+              outline
+              v-model="form.payment.nameaccount"
+            >
+              <v-flex slot="label">ชื่อบัญชี</v-flex>
+            </v-text-field>&nbsp;&nbsp;
+            <v-text-field
+              :rules="rules.name"
+              color="teal"
+              required
+              outline
+              v-model="form.payment.numbank"
+            >
+              <v-flex slot="label">เลขบัญชี</v-flex>
+            </v-text-field>
+          </v-flex>
+        </v-form>
+
+        <v-flex xs6>
+          <v-select v-model="form.type" :items="type" label="ประเภท*" outline></v-select>
+        </v-flex>
+
+        <v-flex xs6>
+          <Root v-bind:done="getFiles"></Root>
+        </v-flex>
+
+        <v-checkbox
+          v-model="form.checkbox"
+          :rules="[v => !!v || 'You must agree to continue!']"
+          label="ยืนยันการสมัครสมาชิก"
+          required
+        ></v-checkbox>
+
+        <v-btn
+          color="blue darken-3"
+          @click="addEvent();"
+          :disabled="!formIsValid"
+          type="submit"
+        >ยืนยันการสมัคร</v-btn>
+        <v-btn @click="clearForm()">ยกเลิก</v-btn>
       </v-card-text>
     </v-card>
   </v-content>
@@ -237,6 +232,7 @@ export default {
     form: {
       name: null,
       dateil: null,
+      youtube: null,
       location: null,
       address: {
         amphurs: null,
@@ -302,7 +298,6 @@ export default {
       this.address.all = userStores.state.rs_getAddress;
     },
     clearForm() {
-      // this.form = Object.assign({}, this.defaultForm);
       this.form = {
         name: null,
         dateil: null,

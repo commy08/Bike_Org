@@ -4,7 +4,7 @@ import axios from '@/axios';
 
 Vue.use(Vuex)
 
-const server_ip = 'http://192.168.1.105:8082/';
+const server_ip = 'http://192.168.1.101:8080/';
 
 const userStores = new Vuex.Store({
     state: {
@@ -17,6 +17,7 @@ const userStores = new Vuex.Store({
         rs_getAddress: [],
         rs_addEvent: [],
         searchs: [],
+        rs_getBank: [],
     },
     mutations: {
         // setPosts(state,posts) {
@@ -48,7 +49,10 @@ const userStores = new Vuex.Store({
         },
         getSearch(state, data) {
             state.searchs = data
-        }
+        },
+        getBank(state, data) {
+            state.rs_getBank = data
+        },
     },
     actions: {
         async getLoginLine(context) {
@@ -132,6 +136,16 @@ const userStores = new Vuex.Store({
                 return r.data
             })
             context.commit("getSearch", data)
+        },
+        async getBank(context) {
+            let data = await axios.get(server_ip + "api/bank", {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                }
+            }).then((r) => {
+                return r.data
+            })
+            context.commit("getBank", data)
         },
     }
 })
