@@ -7,12 +7,10 @@
             <v-avatar size="175px">
               <img
                 class="img-circle elevation-7 mb-1"
-                src="https://raw.githubusercontent.com/vuetifyjs/docs/dev/static/doc-images/lists/1.jpg"
+                :src="user.line_pic"
               >
             </v-avatar>
-            <div class="headline">John&nbsp;
-              <span>Carter</span>
-            </div>
+              <h1 class="blue--text text--lighten-1">{{ user.firstname }}</h1>
             <br>
           </div>
         </v-flex>
@@ -32,15 +30,28 @@
 </template>
 
 <script>
+import userStores from "@/stores/userStores";
+import router from "@/router";
+
 export default {
-  data() {
-    return {
-      name: null,
-      picture: null
-    };
+  data: () => ({
+    user: {}
+  }),
+  methods: {
+    getDatauser: async function() {
+      if (!localStorage.access_token) router.push("/");
+      let optionts = {
+        access_token: localStorage.access_token
+      };
+      await userStores.dispatch("getDatauser", optionts);
+      this.user = userStores.state.rs_getDatauser;
+      // this.showAddress =
+      //   this.user.address + " " + this.user.provinces + " " + this.user.amphurs;
+      // console.log(this.user);
+    }
   },
-  methods:{
-      
+  async mounted() {
+    await this.getDatauser();
   }
 };
 </script>

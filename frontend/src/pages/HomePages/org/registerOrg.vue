@@ -192,6 +192,7 @@
 <script>
 import userStores from "@/stores/userStores";
 import router from "@/router";
+
 export default {
   data: () => ({
     range_bank: 1,
@@ -254,9 +255,9 @@ export default {
   },
   methods: {
     addOrg: async function() {
-      console.log("imageFile", this.imageFile);
+      // console.log("imageFile", this.imageFile);
       // this.form.date = this.date;
-      console.log(this.form);
+      // console.log(this.form);
       // console.log(this.picID)
       if (!localStorage.access_token) router.push("/");
       let optionts = {
@@ -267,7 +268,7 @@ export default {
       await userStores.dispatch("registerOrg", optionts);
       if (userStores.state.registerOrg.status) {
         alert("สมัครสมาชิกเสร็จสิ้น");
-        router.go("/");
+        router.push("/");
       }
     },
     getAddress: async function() {

@@ -4,7 +4,7 @@ import axios from '@/axios';
 
 Vue.use(Vuex)
 
-const server_ip = 'http://192.168.1.101:8080/';
+const server_ip = 'http://192.168.1.108:8080/';
 
 const userStores = new Vuex.Store({
     state: {
@@ -18,11 +18,12 @@ const userStores = new Vuex.Store({
         rs_addEvent: [],
         searchs: [],
         rs_getBank: [],
+        rs_getDatauser: [],
+        viewevent: [],
+        register_event: [],
+        rs_eventbike: [],
     },
     mutations: {
-        // setPosts(state,posts) {
-        //     state.posts = posts
-        // },
         getLoginLine(state, lineloginline) {
             state.lineloginline = lineloginline
         },
@@ -38,9 +39,6 @@ const userStores = new Vuex.Store({
         registerUser(state, data) {
             state.registerUser = data
         },
-        profileOrg(state, data) {
-            state.profileOrg = data
-        },
         getAddress(state, data) {
             state.rs_getAddress = data
         },
@@ -52,6 +50,18 @@ const userStores = new Vuex.Store({
         },
         getBank(state, data) {
             state.rs_getBank = data
+        },
+        getDatauser(state, data) {
+            state.rs_getDatauser = data
+        },
+        getEvent(state, data) {
+            state.viewevent = data
+        },
+        getRegisterevent(state, data) {
+            state.register_event = data
+        },
+        getEventbike(state, data) {
+            state.rs_eventbike = data
         },
     },
     actions: {
@@ -97,16 +107,6 @@ const userStores = new Vuex.Store({
             })
             context.commit("registerUser", data)
         },
-        async profileOrg(context, options) {
-            let data = await axios.get(server_ip + "api/event", options, {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-                }
-            }).then((r) => {
-                return r.data
-            })
-            context.commit("profileOrg", data)
-        },
         async getAddress(context) {
             let data = await axios.get(server_ip + "api/address", {
                 headers: {
@@ -128,7 +128,7 @@ const userStores = new Vuex.Store({
             context.commit("postAddevent", data)
         },
         async getSearch(context, options) {
-            let data = await axios.get(server_ip + "api/select?province=" + options.form.model, {
+            let data = await axios.get(server_ip + "api/select?province=" + options.provinces, {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                 }
@@ -146,6 +146,46 @@ const userStores = new Vuex.Store({
                 return r.data
             })
             context.commit("getBank", data)
+        },
+        async getDatauser(context, options) {
+            let data = await axios.get(server_ip + "api/user?token=" + options.access_token, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                }
+            }).then((r) => {
+                return r.data
+            })
+            context.commit("getDatauser", data)
+        },
+        async getEvent(context, options) {
+            let data = await axios.get(server_ip + "api/event/" + options.id, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                }
+            }).then((r) => {
+                return r.data
+            })
+            context.commit("getEvent", data)
+        },
+        async getRegisterevent(context, options) {
+            let data = await axios.get(server_ip + "getdivision/?token="+options.access_token,+" "+"&id="+options.id, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                }
+            }).then((r) => {
+                return r.data
+            })
+            context.commit("getRegisterevent", data)
+        },
+        async getEventbike(context, options) {
+            let data = await axios.get(server_ip + "eventtype?type="+options.type, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                }
+            }).then((r) => {
+                return r.data
+            })
+            context.commit("getEventbike", data)
         },
     }
 })

@@ -32,7 +32,7 @@
         <v-layout class="align-end justify-start row text-lg-right pb-5 ma-4">
           <v-flex xs2>
             <v-card dark color="accent" class="circle50 elevation-20">
-              <router-link to="/event" tag="div">
+              <router-link to="/allevent" tag="div">
                 <v-card-text>
                   <img :src="require('@/assets/img/mountain-bike.png')" alt="mountain-bike" height="35">
                   <span class="title ml-3">รายการแข่งขัน</span>

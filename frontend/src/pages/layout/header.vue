@@ -10,7 +10,7 @@
         </router-link>
       </v-toolbar-title>
       <v-autocomplete
-        v-model="form.model"
+        v-model="form.searchEvent"
         :items="items"
         :loading="isLoading"
         :search-input.sync="search"
@@ -95,8 +95,6 @@
   </v-content>
 </template>
 
-
-
 <script>
 import userStores from "@/stores/userStores";
 import router from "@/router";
@@ -104,7 +102,7 @@ import router from "@/router";
 export default {
   data: () => ({
     form:{
-      model: null,
+      searchEvent: null,
     },
     isLoading: false,
     items: [],
@@ -153,17 +151,18 @@ export default {
       location.reload();
     },
     searchs: async function() {
-      let optionts = {
-        form: this.form
-      };
+      // let optionts = {
+      //   form: this.form
+      // };
       // console.log(optionts)
-      localStorage.searchs = optionts
+      // localStorage.searchs = this.form.searchEvent
+      window.location="/searchevent?search="+this.form.searchEvent;
       // console.log(this.form)
-      await userStores.dispatch("getSearch", optionts);
+      // await userStores.dispatch("getSearch", optionts);
       // console.log(userStores.state.searchs)
-      if (userStores.state.searchs.status) {
-        router.push("/allevent");
-      } 
+      // if (userStores.state.searchs.status) {
+      //   router.push("/allevent");
+      // } 
     },
   },
   async mounted() {

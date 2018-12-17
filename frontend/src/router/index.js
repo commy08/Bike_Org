@@ -18,7 +18,7 @@ import Formprofile from '@/pages/HomePages/user/formprofile'
 import Historys from '@/pages/HomePages/user/historys'
 
 
-import Events from '@/pages/HomePages/event'
+import AllEvent from '@/pages/HomePages/allevent'
 import MTB_Bike from '@/pages/HomePages/user/mtbBike'
 import road_bike from '@/pages/HomePages/user/roadBike'
 
@@ -26,9 +26,37 @@ import RegisterUser from '@/pages/HomePages/user/registerUser'
 import RegisterOrg from '@/pages/HomePages/org/registerOrg'
 
 import City from '@/pages/city'
-import AllEvent from '@/pages/allEvent'
+import Searchevent from '@/pages/searchevent'
+
+import Profile from '@/pages/HomePages/admin/profile'
+import Ckuser from '@/pages/HomePages/admin/ckuser'
+
+import Events from '@/pages/HomePages/event'
 
 const routes = [
+  {
+    path: '/event/:id',
+    name: 'event',
+    components: {
+      header: Header,
+      default: Events,
+      footer: Footer
+    }
+  },
+  {
+    path: '/admin/profile',
+    name: 'profile',
+    components: {
+      header: Header,
+      default: Profile,
+      footer: Footer
+    },
+    children: [{
+      path: '/admin/',
+      name: 'ckuser',
+      component: Ckuser
+    }, ],
+  },
   {
     path: '/city',
     name: 'city',
@@ -39,11 +67,11 @@ const routes = [
     }
   },
   {
-    path: '/allevent',
-    name: 'AllEvents',
+    path: '/searchevent',
+    name: 'searchevent',
     components: {
       header: Header,
-      default: AllEvent,
+      default: Searchevent,
       footer: Footer
     }
   },
@@ -57,11 +85,11 @@ const routes = [
     }
   },
   {
-    path: '/event',
-    name: 'event',
+    path: '/allevent',
+    name: 'allevent',
     components: {
       header: Header,
-      default: Events,
+      default: AllEvent,
       footer: Footer
     },
     children: [{
@@ -70,7 +98,7 @@ const routes = [
         component: MTB_Bike
       },
       {
-        path: '/event/road_bike',
+        path: '/allevent/road_bike',
         name: 'RoadBike',
         component: road_bike
       }
@@ -123,9 +151,16 @@ const routes = [
       default: ProfileUser,
       footer: Footer
     },
-    children:[
-      { path : '/profileuser', name : 'formprofile',component : Formprofile },
-      { path : '/profileuser/historys', name : 'historys',component : Historys },
+    children: [{
+        path: '/profileuser',
+        name: 'formprofile',
+        component: Formprofile
+      },
+      {
+        path: '/profileuser/historys',
+        name: 'historys',
+        component: Historys
+      },
     ],
   },
   {

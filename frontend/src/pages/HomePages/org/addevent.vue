@@ -5,14 +5,14 @@
       <v-card-text class="light">
         <v-flex>
           <v-text-field
-            v-model="form.name"
+            v-model="form.EventName"
             :rules="rules.name"
             label="ชื่อกิจกรรม*"
             color="purple darken-2"
             required
             outline
           ></v-text-field>
-          <v-textarea v-model="form.dateil" :rules="rules.dateil" color="teal" required outline>
+          <v-textarea v-model="form.detail" :rules="rules.detail" color="teal" required outline>
             <v-flex slot="label">
               รายละเอียด*
               <small>(รายละเอียดข้างต้น)</small>
@@ -21,15 +21,15 @@
           <v-text-field name="youtube" v-model="form.youtube" outline>
             <v-flex slot="label">
               ลิงค์วิดีโอ
-              <small>(วิดีโอแนะนำกิจกรรม)</small>
+              <small>(วีดีโอแนะนำกิจกรรม)</small>
             </v-flex>
           </v-text-field>
           <v-textarea v-model="form.location" :rules="rules.location" required outline>
             <v-flex slot="label">ที่อยู่การแข่งขัน</v-flex>
           </v-textarea>
         </v-flex>
-        
-        <v-layout row wrap>
+
+        <v-layout align-center justify-center wrap>
           <v-flex xs6 sm6>
             <v-select
               :items="address.provinces"
@@ -44,97 +44,54 @@
           </v-flex>
         </v-layout>
 
-        <!-- start dateClose -->
-        <v-flex row fill-height justify-center>
-          &nbsp;&nbsp;&nbsp;
-          <v-text-field
-            v-model="form.dateClose"
-            :rules="rules.name"
-            color="teal"
-            required
-            outline
-            type="date"
-          >
-            <v-flex slot="label">
-              dateClose
-              <small>(เริ่มต้น)</small>
-            </v-flex>
-          </v-text-field>&nbsp;
-          <span>ถึง</span>
-          &nbsp;
-          <v-text-field
-            v-model="form.dateClose"
-            :rules="rules.name"
-            color="teal"
-            required
-            outline
-            type="date"
-          >
-            <v-flex slot="label">
-              dateClose
-              <small>(สิ้นสุด)</small>
-            </v-flex>
-          </v-text-field>
-        </v-flex>
-        <!-- end dateDeadline -->
-        <!-- start dateDeadline -->
-        <v-flex row fill-height justify-center>
-          &nbsp;&nbsp;&nbsp;
-          <v-text-field
-            v-model="form.dateDeadline"
-            :rules="rules.name"
-            color="teal"
-            required
-            outline
-            type="date"
-          >
-            <v-flex slot="label">dateDeadline</v-flex>
-          </v-text-field>&nbsp;
-          <span>ถึง</span>
-          &nbsp;
-          <v-text-field
-            v-model="form.dateDeadline"
-            :rules="rules.name"
-            color="teal"
-            required
-            outline
-            type="date"
-          >
-            <v-flex slot="label">dateDeadline</v-flex>
-          </v-text-field>
-        </v-flex>
-        <!-- end dateClose -->
-        <!-- start dateRace -->
-        <v-flex row fill-height justify-center>
-          &nbsp;&nbsp;&nbsp;
-          <v-text-field
-            v-model="form.dateRace"
-            :rules="rules.name"
-            color="teal"
-            required
-            outline
-            type="date"
-          >
-            <v-flex slot="label">dateRace</v-flex>
-          </v-text-field>&nbsp;
-          <span>ถึง</span>
-          &nbsp;
-          <v-text-field
-            v-model="form.dateRace"
-            :rules="rules.name"
-            color="teal"
-            required
-            outline
-            type="date"
-          >
-            <v-flex slot="label">dateRace</v-flex>
-          </v-text-field>
-        </v-flex>
-        <!-- end dateRace -->
+        <v-layout column wrap>
+          <!-- start dateClose -->
+          <v-flex>
+            <v-text-field
+              v-model="form.dateClose"
+              :rules="rules.name"
+              color="teal"
+              required
+              outline
+              type="date"
+            >
+              <v-flex slot="label">dateCloses</v-flex>
+            </v-text-field>
+          </v-flex>
+          <!-- end dateDeadline -->
+          <!-- start dateDeadline -->
+          <v-flex>
+            <v-text-field
+              v-model="form.dateDeadline"
+              :rules="rules.name"
+              color="teal"
+              required
+              outline
+              type="date"
+            >
+              <v-flex slot="label">dateDeadline</v-flex>
+            </v-text-field>
+          </v-flex>
+          <!-- end dateClose -->
+          <!-- start dateRace -->
+          <v-flex>
+            <v-text-field
+              v-model="form.dateRace"
+              :rules="rules.name"
+              color="teal"
+              required
+              outline
+              type="date"
+            >
+              <v-flex slot="label">dateRace</v-flex>
+            </v-text-field>&nbsp;
+          </v-flex>
+          <!-- end dateRace -->
+        </v-layout>
         <v-flex xs12>
           <v-textarea v-model="form.rule" :rules="rules.name" color="teal" required outline>
             <v-flex slot="label">
-              กฎกติกาการแข่งกัน*
+              กฎกติกาการการแข่งกัน*
               <small>(รายละเอียดข้างต้น)</small>
             </v-flex>
           </v-textarea>
@@ -146,46 +103,43 @@
           </v-textarea>
         </v-flex>
 
-        <v-form>
-          <v-flex row fill-height align-center justify-center>&nbsp;&nbsp;&nbsp;
-            <v-text-field
-              :rules="rules.name"
-              color="teal"
-              required
-              outline
-              v-model="form.payment.namebank"
-            >
-              <v-flex slot="label">
-                การจ่ายเงิน*
-                <small>(ชื่อธนาคาร)</small>
-              </v-flex>
-            </v-text-field>&nbsp;&nbsp;
-            <v-text-field
-              :rules="rules.name"
-              color="teal"
-              required
-              outline
-              v-model="form.payment.nameaccount"
-            >
-              <v-flex slot="label">ชื่อบัญชี</v-flex>
-            </v-text-field>&nbsp;&nbsp;
-            <v-text-field
-              :rules="rules.name"
-              color="teal"
-              required
-              outline
-              v-model="form.payment.numbank"
-            >
-              <v-flex slot="label">เลขบัญชี</v-flex>
-            </v-text-field>
-          </v-flex>
-        </v-form>
+        <div v-for="n in addField" :key="n">
+          <v-layout align-center>
+            <v-flex lg6>
+              <v-text-field v-model="division.DivisionName[n-1]" color="teal" required outline>
+                <v-flex slot="label">ประเภทและรุ่นการแข่งขัน*</v-flex>
+              </v-text-field>
+            </v-flex>&nbsp;
+            <v-flex lg6>
+              <v-select :items="items" v-model="division.sex[n-1]" label="เพศ*" outline></v-select>
+            </v-flex>
+          </v-layout>
 
-        <v-flex xs6>
+          <v-layout justify-space-between>
+            <v-flex xs3>
+              <v-text-field v-model="division.ageMin[n-1]" label="ช่วงอายุ" outline></v-text-field>
+            </v-flex>
+            <v-flex xs3>
+              <v-text-field v-model="division.ageMax[n-1]" label="ช่วงอายุ" outline></v-text-field>
+            </v-flex>
+            <v-flex xs3>
+              <v-text-field v-model="division.cost[n-1]" label="ค่าสมัคร" outline></v-text-field>
+            </v-flex>
+          </v-layout>
+          <hr>
+        </div>
+
+        <v-layout justify-end>
+          <v-btn lg12 fab dark color="amber" @click="addField++">
+            <v-icon dark>add</v-icon>
+          </v-btn>
+        </v-layout>
+
+        <v-flex xs5>
           <v-select v-model="form.type" :items="type" label="ประเภท*" outline></v-select>
         </v-flex>
 
-        <v-flex xs6>
+        <v-flex>
           <Root v-bind:done="getFiles"></Root>
         </v-flex>
 
@@ -211,27 +165,33 @@
 <script>
 import userStores from "@/stores/userStores";
 import router from "@/router";
-// import calendar from "./calendar";
 import Root from "@/pages/Root";
 import city from "@/pages/city";
 
 export default {
   components: {
-    // calendar,
     Root,
     city
   },
 
   data: () => ({
+    addField: 1,
     address: {
       amphurs: [],
       provinces: [],
       all: []
     },
-
+    items: ["เพศชาย", "เพศหญิง"],
+    division: {
+      DivisionName: [],
+      ageMax: [],
+      ageMin: [],
+      sex: [],
+      cost: []
+    },
     form: {
-      name: null,
-      dateil: null,
+      EventName: null,
+      detail: null,
       youtube: null,
       location: null,
       address: {
@@ -243,20 +203,17 @@ export default {
       dateRace: null,
       type: null,
       rule: null,
-      user_id: null,
       reward: null,
-      payment: {
-        namebank: null,
-        nameaccount: null,
-        numbank: null
-      },
+      divisions: [],
+      user_id: null,
       status: null,
       imgs: []
     },
+
     type: ["จักรยานภูเขา", "จักรยานทางเรียบ"],
     rules: {
       name: [val => (val || "").length > 0 || "กรุกรอกข้อมูล"],
-      dateil: [val => (val || "").length > 0 || "กรุกรอกข้อมูล"],
+      detail: [val => (val || "").length > 0 || "กรุกรอกข้อมูล"],
       location: [val => (val || "").length > 0 || "กรุกรอกข้อมูล"]
     }
   }),
@@ -266,10 +223,35 @@ export default {
       // console.log(files);
     },
     addEvent: async function() {
-      // this.form.date = this.date;
-      // console.log(this.form)
-      // console.log(this.user)
-      // console.log(this.picID)
+      for (let index = 0; index < this.division.DivisionName.length; index++) {
+        let tmp = {
+          DivisionName: this.division.DivisionName[index],
+          ageMax: this.division.ageMax[index],
+          ageMin: this.division.ageMin[index],
+          sex: this.division.sex[index],
+          cost: this.division.cost[index]
+        };
+        this.form.divisions.push(tmp);
+      }
+      if (
+        this.form.EventName == null ||
+        this.form.detail == null ||
+        this.form.youtube == null ||
+        this.form.location == null ||
+        this.form.address.amphurs == null ||
+        this.form.address.provinces == null ||
+        this.form.dateClose == null ||
+        this.form.dateDeadline == null ||
+        this.form.dateRace == null ||
+        this.form.type == null ||
+        this.form.rule == null ||
+        this.form.reward == null ||
+        this.form.divisions == null ||
+        this.form.imgs == null
+      ) {
+        return alert("โปรดกรอกข้อมูลที่อยู่เว็บไซต์ให้ถูกต้อง");
+      }
+
       if (!localStorage.access_token) router.push("/");
       let optionts = {
         access_token: localStorage.access_token,
@@ -278,6 +260,7 @@ export default {
       // console.log(optionts)
       await userStores.dispatch("postAddevent", optionts);
       alert(userStores.state.rs_addEvent.msg);
+      router.push("/");
     },
     getAddress: async function() {
       // console.log(this.form)
@@ -299,24 +282,24 @@ export default {
     },
     clearForm() {
       this.form = {
-        name: null,
-        dateil: null,
+        EventName: null,
+        detail: null,
+        youtube: null,
         location: null,
         address: {
           amphurs: null,
-          provinces: null,
-          all: []
+          provinces: null
         },
         dateClose: null,
         dateDeadline: null,
         dateRace: null,
         type: null,
         rule: null,
-        user_id: null,
         reward: null,
-        payment: null,
+        divisions: [],
+        user_id: null,
         status: null,
-        pic: null
+        imgs: []
       };
     }
   },

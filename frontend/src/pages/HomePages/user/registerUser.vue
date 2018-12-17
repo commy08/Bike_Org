@@ -221,10 +221,9 @@ export default {
     },
     getFiles(files) {
       this.form.imgs = files;
-      console.log(files);
+      // console.log(files);
     },
     addUser: async function() {
-      // this.form.date = this.date;
       // console.log(this.form)
       // console.log(this.user)
       // console.log(this.date)
